@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs')
 app.use(cors())
 app.use(express.json())
 
+
 mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
 
 // mongoose.connect('mongodb://localhost:27017/user-info')
