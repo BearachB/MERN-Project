@@ -9,8 +9,7 @@ const bcrypt = require('bcryptjs')
 app.use(cors())
 app.use(express.json())
 
-
-// mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
+//mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
 
 mongoose.connect('mongodb://localhost:27017/user-info')
 
@@ -55,7 +54,7 @@ app.post('/api/login', async (req, res) => {
   }
 })
 
-app.get('/api/quote', async (req, res) => {
+app.get('/api/bio', async (req, res) => {
   const token = req.headers['x-access-token']
 
   try {
@@ -63,20 +62,20 @@ app.get('/api/quote', async (req, res) => {
     const email = decoded.email
     const user = await User.findOne({ email: email })
 
-    return res.json({ status: 'ok', quote: user.quote, photo: user.photo })
+    return res.json({ status: 'ok', bio: user.bio, photo: user.photo })
   } catch (error) {
     console.log(error)
     res.json({ status: 'error', error: 'invalid token' })
   }
 })
 
-app.post('/api/quote', async (req, res) => {
+app.post('/api/bio', async (req, res) => {
   const token = req.headers['x-access-token']
 
   try {
     const decoded = jwt.verify(token, 'secret123')
     const email = decoded.email
-    await User.updateOne({ email: email }, { $set: { quote: req.body.quote } })
+    await User.updateOne({ email: email }, { $set: { bio: req.body.bio } })
 
     return res.json({ status: 'ok' })
   } catch (error) {
@@ -84,6 +83,51 @@ app.post('/api/quote', async (req, res) => {
     res.json({ status: 'error', error: 'invalid token' })
   }
 })
+
+app.get('/api/bio', async (req, res) => {
+  const token = req.headers['x-access-token']
+
+  try {
+    const decoded = jwt.verify(token, 'secret123')
+    const email = decoded.email
+    const user = await User.findOne({ email: email })
+
+    return res.json({ status: 'ok', bio: user.bio, photo: user.photo })
+  } catch (error) {
+    console.log(error)
+    res.json({ status: 'error', error: 'invalid token' })
+  }
+})
+
+app.put('/api/reset-password', async (req,res) => {
+  const token = req.headers['x-access-token']
+  console.log(token)
+  try{
+    const newPassword = await bcrypt.hash(req.body.password, 15)
+    console.log(newPassword)
+    const decoded = jwt.verify(token, 'secret123')
+    const email = decoded.email
+    await User.updateOne({ email: email }, { $set: { password: newPassword } })
+    return  res.json({ status: 'ok' })
+  }catch(err){
+    res.json({ status: 'error'})
+  }
+})
+
+app.delete('/api/delete-profile', async (req,res) => {
+  const token = req.headers['x-access-token']
+  console.log(token)
+  try{
+    const decoded = jwt.verify(token, 'secret123')
+    const email = decoded.email
+    const user = await User.findOneAndDelete({ email: email })
+    return  res.json({ status: 'ok' })
+  }catch(err){
+    res.json({ status: 'error'})
+  }
+})
+
+
 
 app.listen(1337, () => {
   console.log('Server started on 1337')
