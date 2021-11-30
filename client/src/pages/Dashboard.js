@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import jwt from 'jsonwebtoken'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import photo from './photos/blank_male_profile_pic.jpg'
 
 const Dashboard = () => {
   const navigate = useNavigate()
-  const [quote, setQuote] = useState('')
-  const [tempQuote, setTempQuote] = useState('')
+  const [bio, setBio] = useState('')
+  const [tempBio, setTempBio] = useState('')
 
-  // const [photo, setPhoto] = useState('')
+  const [photo, setPhoto] = useState('')
 
-  async function populateQuote() {
-    const req = await fetch('http://localhost:1337/api/quote', {
+  async function populateBio() {
+    const req = await fetch('http://localhost:1337/api/bio', {
       headers: {
         'x-access-token': localStorage.getItem('token'),
       },
@@ -18,7 +19,7 @@ const Dashboard = () => {
 
     const data = await req.json()
     if (data.status === 'ok') {
-      setQuote(data.quote)
+      setBio(data.bio)
     } else {
       alert(data.error)
     }
@@ -32,7 +33,7 @@ const Dashboard = () => {
         localStorage.removeItem('token')
         navigate('../login/', { replace: true })
       } else {
-        populateQuote()
+        populateBio()
         // updatePhoto()
       }
     }
@@ -50,24 +51,24 @@ const Dashboard = () => {
   //     }),
   //   })
 
-  async function updateQuote(event) {
+  async function updateBio(event) {
     event.preventDefault()
 
-    const req = await fetch('http://localhost:1337/api/quote', {
+    const req = await fetch('http://localhost:1337/api/bio', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        quote: tempQuote,
+        bio: tempBio,
       }),
     })
 
     const data = await req.json()
     if (data.status === 'ok') {
-      setQuote(tempQuote)
-      setTempQuote('')
+      setBio(tempBio)
+      setTempBio('')
     } else {
       alert(data.error)
     }
@@ -80,34 +81,52 @@ const Dashboard = () => {
   }
 
 
-  // function handleDelete() {
-  //   localStorage.setItem('token', '')
-  //   localStorage.clear()
-  //   navigate('../login/', { replace: true })
-  // }
+  async function  handleDelete(event) {
+
+    event.preventDefault()
+
+    const response = await fetch('http://localhost:1337/api/delete-profile', {
+      method: 'DELETE',
+      headers: {
+        'x-access-token': localStorage.getItem('token')
+      }
+    })
+
+    const data = await response.json()
+    console.log(data.status)
+
+    if (data.status === 'ok') {
+      localStorage.clear()
+      navigate('../login/', { replace: true })
+    }
+  }
+
+
+  
 
   return (
     <div>
-      <h1>Your Bio: {quote || 'No quote found'}</h1>
-      <form id='bio_form' onSubmit={updateQuote}>
+      <h1>Your Bio: {bio || 'No bio found'}</h1>
+      <form id='bio_form' onSubmit={updateBio}>
         <input
           id='bio_input'
           type="text"
           placeholder="Bio"
-          value={tempQuote}
-          onChange={(e) => setTempQuote(e.target.value)}
+          value={tempBio}
+          onChange={(e) => setTempBio(e.target.value)}
         />
         {/* <input type="submit" value="Update quote" /> */}
       </form>
-      <button type="button" onClick={updateQuote}>Update Quote</button>
+      <button type="button" onClick={updateBio}>Update Bio</button>
       <br/>
       <button type="button" onClick={handleLogOut}>Log Out</button>
       <br/>
-      <button type="button" onClick={() => alert("Edit Account Information")}>Edit Account Information</button>
+      <Link to="/editprofile"><button>Update Profile</button></Link>
+      {/* <button type="button" onClick={() => alert("Edit Account Information")}>Edit Account Information</button> */}
       <br/>
-      <button type="button" onClick={() => alert("Delete Account Button Pressed")}>Delete Account</button>
+      <button type="button" onClick={handleDelete}>Delete Account</button>
     </div>
   )
-}
+  }
 
 export default Dashboard

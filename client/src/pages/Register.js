@@ -55,7 +55,6 @@ function App() {
           placeholder="Password"
         />
         <br />
-        <br />
         <input type="submit" value="Register" />
       </form>
     </div>
