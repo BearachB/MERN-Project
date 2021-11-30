@@ -10,9 +10,9 @@ app.use(cors())
 app.use(express.json())
 
 
-mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
+// mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
 
-// mongoose.connect('mongodb://localhost:27017/user-info')
+mongoose.connect('mongodb://localhost:27017/user-info')
 
 app.post('/api/register', async (req, res) => {
   console.log(req.body)

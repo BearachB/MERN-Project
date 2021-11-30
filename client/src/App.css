@@ -1,7 +1,15 @@
+
+
 .App {
   text-align: center;
 }
 
+body {
+  background-color: rgb(240, 240, 240);
+  text-align: center;
+}
+
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -80,7 +88,7 @@ thead {
 
 button {
   width: 250px;
-  /* height: 30px; */
+  height: 30px;
   background-color: rgb(170, 170, 170);
   color: white;
   font-weight: bold;
@@ -94,7 +102,7 @@ button {
 }
 
 #bio_form {
-  /* width: 250px; */  
+  width: 250px;  
 }
 
 #bio_input {
@@ -111,4 +119,4 @@ a {
 
 #heading {
   font-size: 20px;
-}
+} */

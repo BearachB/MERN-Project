@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import jwt from 'jsonwebtoken'
 import { useNavigate } from 'react-router-dom'
-import photo from './photos/blank_male_profile_pic.jpg'
 
 const Dashboard = () => {
   const navigate = useNavigate()
   const [quote, setQuote] = useState('')
   const [tempQuote, setTempQuote] = useState('')
 
-  const [photo, setPhoto] = useState('')
+  // const [photo, setPhoto] = useState('')
 
   async function populateQuote() {
     const req = await fetch('http://localhost:1337/api/quote', {
@@ -81,11 +80,11 @@ const Dashboard = () => {
   }
 
 
-  function handleDelete() {
-    localStorage.setItem('token', '')
-    localStorage.clear()
-    navigate('../login/', { replace: true })
-  }
+  // function handleDelete() {
+  //   localStorage.setItem('token', '')
+  //   localStorage.clear()
+  //   navigate('../login/', { replace: true })
+  // }
 
   return (
     <div>
