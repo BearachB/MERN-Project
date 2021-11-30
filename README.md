@@ -29,5 +29,5 @@ Node version v16.13.0 is installed
 ```
 npm start
 ```
-7. In “server” CLI, “npm dev” to start 
+7. In “server” CLI, “npm run dev” to start 
 8. The web. app. will now open in your default browser. 
