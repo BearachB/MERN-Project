@@ -76,7 +76,7 @@ app.get('/api/bio', async (req, res) => {
     const email = decoded.email
     const user = await User.findOne({ email: email })
 
-    return res.json({ status: 'ok', bio: user.bio, photo: user.photo })
+    return res.json({ status: 'ok', bio: user.bio, image: user.image })
   } catch (error) {
     console.log(error)
     res.json({ status: 'error', error: 'invalid token' })
@@ -113,12 +113,37 @@ app.get('/api/bio', async (req, res) => {
   }
 })
 
+
+// update profile photo
+app.patch('/api/profile-photo', async (req, res) => {
+  const token = req.headers['x-access-token']
+
+  try {
+    const decoded = jwt.verify(token, 'secret123')
+    const email = decoded.email
+    await User.updateOne({ email: email }, { $set: { image: req.body.image } })
+
+    return res.json({ status: 'ok' })
+  } catch (error) {
+    console.log(error)
+    res.json({ status: 'error', error: 'invalid token' })
+  }
+})
+
+app.patch('/api/reset-password', async (req,res) => {
+  const token = req.headers['x-access-token']
+  console.log(token)
+  try{
+    const newPassword = await bcrypt.hash(req.body.password, 2)
+    // console.log(newPassword)
+
 app.put('/api/reset-password', async (req, res) => {
   const token = req.headers['x-access-token']
   console.log(token)
   try {
     const newPassword = await bcrypt.hash(req.body.password, 15)
     console.log(newPassword)
+
     const decoded = jwt.verify(token, 'secret123')
     const email = decoded.email
     await User.updateOne({ email: email }, { $set: { password: newPassword } })
