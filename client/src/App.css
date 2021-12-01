@@ -1,4 +1,4 @@
-
+/* 
 
 .App {
   text-align: center;
@@ -7,6 +7,28 @@
 body {
   background-color: rgb(240, 240, 240);
   text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  font-family: Sans-Serif;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95vw;
+  text-align: center;
+}
+
+td, th {
+  border: 3px solid rgb(182, 182, 182);
+  padding: 5px;
+  text-align: left;
+}
+
+thead {
+  font-size: 16px;
+  text-decoration: underline;
+  text-align: left;
 }
 
 /* 
@@ -119,4 +141,4 @@ a {
 
 #heading {
   font-size: 20px;
-} */
+} */ 

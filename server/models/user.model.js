@@ -10,7 +10,7 @@ const User = new mongoose.Schema(
     image: {type: String, default: "https://res.cloudinary.com/webapps259/image/upload/v1638360127/mernproject/uvpdztcmvjjblahgpfru.jpg"
   }
   },
-  { collection: 'user-data' },
+  { collection: 'user_data' },
 )
 
 const model = mongoose.model('UserData', User)
