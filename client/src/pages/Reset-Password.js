@@ -12,7 +12,7 @@ function App() {
     console.log(password)
 
     const response = await fetch('http://localhost:1337/api/reset-password', {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': localStorage.getItem('token')

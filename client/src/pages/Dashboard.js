@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import jwt from 'jsonwebtoken'
 import { useNavigate, Link } from 'react-router-dom'
-import photo from './photos/blank_male_profile_pic.jpg'
+
 
 const Dashboard = () => {
   const navigate = useNavigate()
   const [bio, setBio] = useState('')
   const [tempBio, setTempBio] = useState('')
-
   const [photo, setPhoto] = useState('')
 
   async function populateBio() {
@@ -24,6 +23,24 @@ const Dashboard = () => {
       alert(data.error)
     }
   }
+
+  async function loadImage() {
+    const req = await fetch('http://localhost:1337/api/bio', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+
+    const data = await req.json()
+    if (data.status === 'ok') {
+      setPhoto(data.image)
+      
+    } else {
+      alert(data.error)
+    }
+  }
+loadImage()
+// console.log(photo)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -107,6 +124,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Your Bio: {bio || 'No bio found'}</h1>
+      <img src={photo} alt={photo} width="100"  style={{'borderRadius':'200px'}}/>
       <form id='bio_form' onSubmit={updateBio}>
         <input
           id='bio_input'
