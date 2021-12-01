@@ -9,6 +9,7 @@ import Photos from './pages/Photos'
 import './App.css'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
+import Songs from './pages/Songs'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/editprofile" exact element={<EditProfile />} />
           <Route path="/reset-password" exact element={<ResetPassword />} />
           <Route path="/photos" exact element={<Photos />} />
+          <Route path="/songs" exact element={<Songs />} />
         </Routes>
       </BrowserRouter>
       <Footer />

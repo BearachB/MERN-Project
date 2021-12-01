@@ -9,7 +9,7 @@ const User = new mongoose.Schema(
     image: { type: String},
     bio: { type: String},
   },
-  { collection: 'user-data' },
+  { collection: 'user_data' },
 )
 
 const model = mongoose.model('UserData', User)

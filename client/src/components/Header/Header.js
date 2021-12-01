@@ -24,6 +24,7 @@ const Header = () => {
               navbarScroll
             >
               <Nav.Link href="/search">Search</Nav.Link>
+              <Nav.Link href="/songs">Song List</Nav.Link>
               <Nav.Link href="/login">Log In</Nav.Link>
               <NavDropdown title="Account" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">My Profile</NavDropdown.Item>
