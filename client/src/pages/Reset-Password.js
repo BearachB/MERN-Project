@@ -31,7 +31,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div class="profile-content">
       <h1>Reset</h1>
       <form onSubmit={resetPassword}>
         <input

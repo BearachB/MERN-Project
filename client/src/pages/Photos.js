@@ -55,7 +55,7 @@ function App() {
 
    return (
 
-        <div>
+        <div class="profile-content">
             <h1>Upload image</h1>
             <input type="file" name="file" placeholder="upload an image " 
             onChange={UploadImage} />
