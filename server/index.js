@@ -12,20 +12,36 @@ app.use(cors())
 app.use(express.json())
 
 mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
-
 // mongoose.connect('mongodb://localhost:27017/user-info')
+// mongoose.connect('mongodb://localhost:27017/full-mern-stack')
 
-app.get('/api/songs', async (req, res) => {
-  try {
-    const song = await Song.find({},)
-    // console.log(song)
-    // console.log({song:artist_name})
-    return res.json({ status: 'ok', song })
-  } catch (error) {
-    console.log(error)
-    res.json({ status: 'error', error: "Can't get songs" })
-  }
-})
+
+app.get("/api/songs", paginatedResults(), (req, res) => {
+  res.json(res.paginatedResults);
+});
+
+// https://betterprogramming.pub/build-a-paginated-api-using-node-js-express-and-mongodb-227ed5dc2b4b
+function paginatedResults() {
+  return async (req, res, next) => {
+    const page = parseInt(req.query.page);
+    const limit = parseInt(req.query.limit);
+    const skipIndex = (page - 1) * limit;
+    const results = {};
+    try {
+      results.results = await Song.find()
+        .sort({ _id: 1 })
+        .limit(limit)
+        .skip(skipIndex)
+        .exec();
+      res.paginatedResults = results;
+      next();
+    } catch (e) {
+      res.status(500).json({ message: "Error Occured" });
+    }
+  };
+}
+
+
 
 app.post('/api/register', async (req, res) => {
   console.log(req.body)

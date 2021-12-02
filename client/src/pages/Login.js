@@ -30,7 +30,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div class="profile-content">
       <h1>Login</h1>
       <form onSubmit={loginUser}>
         <input
