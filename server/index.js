@@ -12,21 +12,8 @@ app.use(cors())
 app.use(express.json())
 
 mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
-
+// mongoose.connect('mongodb://localhost:27017/user-info')
 // mongoose.connect('mongodb://localhost:27017/full-mern-stack')
-
-// Working getsongs API
-// app.get('/api/songs', async (req, res) => {
-//   try {
-//     const song = await Song.find({},)
-//     // console.log(song)
-//     // console.log({song:artist_name})
-//     return res.json({ status: 'ok', song })
-//   } catch (error) {
-//     console.log(error)
-//     res.json({ status: 'error', error: "Can't get songs" })
-//   }
-// })
 
 
 app.get("/api/songs", paginatedResults(), (req, res) => {
@@ -53,6 +40,7 @@ function paginatedResults() {
     }
   };
 }
+
 
 
 app.post('/api/register', async (req, res) => {
@@ -194,6 +182,29 @@ app.delete('/api/delete-profile', async (req, res) => {
   }
 })
 
+
+// post to favourites
+
+app.patch('/api/addfavourite', async (req, res) => {
+  const token = req.headers['x-access-token']
+
+  try {
+    const decoded = jwt.verify(token, 'secret123')
+    const email = decoded.email
+    await User.updateOne({ email: email }, { $push: { favourites: req.body } })
+
+    return res.json({ status: 'ok' })
+  } catch (error) {
+    console.log(error)
+    res.json({ status: 'error', error: 'invalid token' })
+  }
+})
+
+
+
+
+
 app.listen(1337, () => {
   console.log('Server started on 1337')
 })
+
