@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import jwt from 'jsonwebtoken'
 import { useNavigate, Link } from 'react-router-dom'
 
-
 const Dashboard = () => {
   const navigate = useNavigate()
   const [bio, setBio] = useState('')
@@ -122,7 +121,7 @@ loadImage()
   
 
   return (
-    <div>
+    <div class="profile-content">
       <h1>Your Bio: {bio || 'No bio found'}</h1>
       <img src={photo} alt={photo} width="100"  style={{'borderRadius':'200px'}}/>
       <form id='bio_form' onSubmit={updateBio}>

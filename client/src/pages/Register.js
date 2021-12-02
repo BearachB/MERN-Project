@@ -31,7 +31,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div class="profile-content">
       <h1>Register</h1>
       <form onSubmit={registerUser}>
         <input

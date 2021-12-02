@@ -80,6 +80,12 @@
   }
 }
 
+footer {
+  font-size: 16px;
+  color: rgb(128, 128, 128);
+}
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -87,10 +93,14 @@ body {
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align);
+  text-align: center;
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent
+}
+
+.profile-content {
+  margin: 50px 20px 150px 20px;
 }
 
 hr {
@@ -302,7 +312,10 @@ img, svg {
 
 table {
   caption-side: bottom;
-  border-collapse: collapse
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
 }
 
 caption {
@@ -314,13 +327,33 @@ caption {
 
 th {
   text-align: inherit;
-  text-align: -webkit-match-parent
+  text-align: -webkit-match-parent;
+  text-decoration: underline;
 }
 
 tbody, td, tfoot, th, thead, tr {
-  border-color: inherit;
+  border-color: rgb(223, 223, 223);
   border-style: solid;
-  border-width: 0
+  border-width: 1;
+  border-collapse: collapse;
+  margin: auto;
+  text-align: left;
+  padding: 0px 5px 0px 5px;
+
+}
+
+#resultsPages {
+  margin: auto;
+  text-align: center;
+  align-items: center;
+}
+
+.pageButton{
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  padding-top: 5px;
 }
 
 label {
@@ -328,7 +361,7 @@ label {
 }
 
 button {
-  border-radius: 0
+  border-radius: 0;
 }
 
 button:focus:not(:focus-visible) {
@@ -339,7 +372,10 @@ button, input, optgroup, select, textarea {
   margin: 0;
   font-family: inherit;
   font-size: inherit;
-  line-height: inherit
+  color: inherit;
+  line-height: inherit;
+  border-radius: 6px;
+  margin: 10px 0px 0px 10px;
 }
 
 button, select {
@@ -2024,7 +2060,8 @@ progress {
 }
 
 .table>thead {
-  vertical-align: bottom
+  vertical-align: bottom;
+  text-decoration: underline;
 }
 
 .table>:not(:first-child) {
@@ -4915,6 +4952,7 @@ textarea.form-control-lg {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, .125);
   border-radius: .25rem
+
 }
 
 .card>hr {
@@ -5240,7 +5278,14 @@ textarea.form-control-lg {
   display: -ms-flexbox;
   display: flex;
   padding-left: 0;
-  list-style: none
+  list-style: none;
+  text-align: center;
+  align-items: center;
+}
+
+#paginationDiv {
+  margin-left: 300px;
+  margin-right: auto;
 }
 
 .page-link {

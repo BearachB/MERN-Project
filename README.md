@@ -31,3 +31,10 @@ npm start
 ```
 7. In “server” CLI, “npm run dev” to start 
 8. The web. app. will now open in your default browser. 
+
+
+FOR Connection to MongoDB Atlas Server:
+Connecting in Compass: mongodb+srv://<username>:<password>@cluster0.d4sre.mongodb.net/mern_project
+For Daragh: username="daragh"; password="mernproject"
+For Bearach: username="bearach"; password="mernproject"
+
