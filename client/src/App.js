@@ -6,10 +6,12 @@ import Dashboard from './pages/Dashboard'
 import EditProfile from './pages/EditProfile'
 import ResetPassword from './pages/Reset-Password'
 import Photos from './pages/Photos'
+import ForgotPassword from './pages/ForgotPassword'
 import './App.css'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Songs from './pages/Songs'
+
 
 const App = () => {
   return (
@@ -25,6 +27,7 @@ const App = () => {
           <Route path="/reset-password" exact element={<ResetPassword />} />
           <Route path="/photos" exact element={<Photos />} />
           <Route path="/songs" exact element={<Songs />} />
+          <Route path="/forgot-password" exact element={<ForgotPassword />} />
         </Routes>
       </BrowserRouter>
       <Footer />

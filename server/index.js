@@ -11,9 +11,9 @@ const bodyParser = require('body-parser')
 app.use(cors())
 app.use(express.json())
 
-// mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
 
-mongoose.connect('mongodb://localhost:27017/full-mern-stack')
+// mongoose.connect('mongodb://localhost:27017/user-info')
 
 app.get('/api/songs', async (req, res) => {
   try {
@@ -130,12 +130,12 @@ app.patch('/api/profile-photo', async (req, res) => {
   }
 })
 
-app.patch('/api/reset-password', async (req,res) => {
-  const token = req.headers['x-access-token']
-  console.log(token)
-  try{
-    const newPassword = await bcrypt.hash(req.body.password, 2)
-    // console.log(newPassword)
+// app.patch('/api/reset-password', async (req,res) => {
+//   const token = req.headers['x-access-token']
+//   console.log(token)
+//   try{
+//     const newPassword = await bcrypt.hash(req.body.password, 2)
+//     // console.log(newPassword)
 
 app.put('/api/reset-password', async (req, res) => {
   const token = req.headers['x-access-token']
@@ -166,6 +166,29 @@ app.delete('/api/delete-profile', async (req, res) => {
   }
 })
 
+
+// post to favourites
+
+app.patch('/api/addfavourite', async (req, res) => {
+  const token = req.headers['x-access-token']
+
+  try {
+    const decoded = jwt.verify(token, 'secret123')
+    const email = decoded.email
+    await User.updateOne({ email: email }, { $push: { favourites: req.body } })
+
+    return res.json({ status: 'ok' })
+  } catch (error) {
+    console.log(error)
+    res.json({ status: 'error', error: 'invalid token' })
+  }
+})
+
+
+
+
+
 app.listen(1337, () => {
   console.log('Server started on 1337')
 })
+
