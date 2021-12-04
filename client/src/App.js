@@ -15,6 +15,8 @@ import Search from './pages/Search'
 import { keepTheme } from './components/Themes'
 import FavPage from './pages/addfav'
 import Homepage from './pages/Homepage'
+import SongsNL from './pages/SongsNL'
+import SearchNL from './pages/SearchNL'
 
 const App = () => {
   useEffect(() => {
@@ -38,6 +40,8 @@ const App = () => {
           <Route path="/search" exact element={<Search />} />
           <Route path="/forgot-password" exact element={<ForgotPassword />} />
           <Route path="/fav-page" exact element={<FavPage />} />
+          <Route path="/songs-nl" exact element={<SongsNL />} />
+          <Route path="/search-nl" exact element={<SearchNL />} />
 
         </Routes>
       </BrowserRouter>

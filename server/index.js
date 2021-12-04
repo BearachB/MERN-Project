@@ -157,6 +157,9 @@ app.post('/api/login', async (req, res) => {
   }
 })
 
+
+
+
 app.get('/api/bio', async (req, res) => {
   const token = req.headers['x-access-token']
 
@@ -165,7 +168,7 @@ app.get('/api/bio', async (req, res) => {
     const email = decoded.email
     const user = await User.findOne({ email: email })
 
-    return res.json({ status: 'ok', bio: user.bio, image: user.image, favourites: user.favourites })
+    return res.json({ status: 'ok', bio: user.bio, image: user.image, favourites: user.favourites, name: user.name })
   } catch (error) {
     console.log(error)
     res.json({ status: 'error', error: 'invalid token' })
@@ -226,7 +229,7 @@ app.patch('/api/profile-photo', async (req, res) => {
 //     const newPassword = await bcrypt.hash(req.body.password, 2)
 //     // console.log(newPassword)
 
-app.put('/api/reset-password', async (req, res) => {
+app.patch('/api/reset-password', async (req, res) => {
   const token = req.headers['x-access-token']
   console.log(token)
   try {

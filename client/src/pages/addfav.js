@@ -5,7 +5,7 @@ function FavPage() {
   // let [page, setPage] = useState(1)
   const [favourites, setFavourites] = useState([])
   const [isLoaded, setisLoaded] = useState(false)
-  const [showFavourites, setShowFavourites] = useState([])
+  // const [showFavourites, setShowFavourites] = useState([])
 
   // const nextPage = () => {
   //   setPage(page + 1)
