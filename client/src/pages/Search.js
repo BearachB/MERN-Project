@@ -60,7 +60,6 @@ function App() {
               <th>Track Name</th>
               <th>Popularity</th>
               <th>Genre</th>
-              <th>Track ID</th>
               <th>Favourite(★)</th>
             </tr>
           </thead>
@@ -72,7 +71,6 @@ function App() {
                 <td>{info.track_name}</td>
                 <td>{info.popularity}</td>
                 <td>{info.genre}</td>
-                <td>{info.track_id}</td>
                 <td>☆★</td>
               </tr>
             ))}

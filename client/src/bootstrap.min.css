@@ -127,6 +127,17 @@ footer {
 
 }
 
+body, html {
+  height: 100%;
+  }
+  .bg {
+  background-image: url("https://images.pexels.com/photos/1389429/pexels-photo-1389429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+  
 
 body {
   margin: 0;

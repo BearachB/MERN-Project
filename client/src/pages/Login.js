@@ -22,10 +22,16 @@ function App() {
 
     if (data.user) {
       localStorage.setItem('token', data.user)
+      console.log("Login success")
+      
       alert('Login successful')
+      
+
       window.location.href = '/dashboard'
     } else {
+      console.log("Username/Password Error")
       alert('Please check your username & password')
+
     }
   }
 
