@@ -80,9 +80,51 @@
   }
 }
 
+.theme-dark {
+  --dark-text: #e4e4e4;
+  --light-text: #F9F8F8;
+  --dark-background: #2F4550;
+  --light-background: #586F7C;
+  --accent: #B8DBD9;
+  --button-border: #B8DBD9;
+}
+
+.theme-light {
+  --dark-text: #5E4B56;
+  --light-text: #5E4B56;
+  --dark-background: #e9eeed;
+  --light-background: #EDDCD2;
+  --accent: #DBE7E4;
+  --button-border: #5E4B56;
+}
+
+html, #root {
+  background-color: var(--dark-background);
+  color: var(--dark-text);
+}
+
+#footer-icon-grid {
+  display: grid;
+  grid-template-columns: 6fr 1fr 1fr 1fr 1fr 1fr 1fr 6fr;
+  gap: 1px;
+  grid-auto-flow: row;
+  font-size: 4vw;
+  margin-top: 20px;
+}
+
+nav {
+  background-color: var(--dark-background);
+  color: var(--light-text);
+}
+
+.main-container {
+  background-color: var(--light-background);
+}
+
 footer {
   font-size: 16px;
   color: rgb(128, 128, 128);
+
 }
 
 
@@ -348,7 +390,7 @@ tbody, td, tfoot, th, thead, tr {
   align-items: center;
 }
 
-.pageButton{
+.pageButton {
   margin: auto;
   text-align: center;
   align-items: center;
@@ -360,10 +402,6 @@ label {
   display: inline-block
 }
 
-button {
-  border-radius: 0;
-}
-
 button:focus:not(:focus-visible) {
   outline: 0
 }
@@ -372,7 +410,7 @@ button, input, optgroup, select, textarea {
   margin: 0;
   font-family: inherit;
   font-size: inherit;
-  color: inherit;
+  color: #898989;
   line-height: inherit;
   border-radius: 6px;
   margin: 10px 0px 0px 10px;
@@ -5021,9 +5059,9 @@ textarea.form-control-lg {
     border-top: 1px solid rgba(0, 0, 0, .125); */
   position: absolute;
   /* margin-top: -600px; */
-  left:0;
-  bottom:0;
-  right:0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .card-footer:last-child {

@@ -6,39 +6,74 @@ const User = require('./models/user.model')
 const Song = require('./models/song_model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const bodyParser = require('body-parser')
 
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect('mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority')
+mongoose.connect(
+  'mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority',
+)
 // mongoose.connect('mongodb://localhost:27017/user-info')
 // mongoose.connect('mongodb://localhost:27017/full-mern-stack')
 
-
-app.get("/api/songs", paginatedResults(), (req, res) => {
-  res.json(res.paginatedResults);
-});
+app.get('/api/songs', paginatedResults(), (req, res) => {
+  res.json(res.paginatedResults)
+})
 
 // https://betterprogramming.pub/build-a-paginated-api-using-node-js-express-and-mongodb-227ed5dc2b4b
 function paginatedResults() {
   return async (req, res, next) => {
-    const page = parseInt(req.query.page);
-    const limit = parseInt(req.query.limit);
-    const skipIndex = (page - 1) * limit;
-    const results = {};
+    const page = parseInt(req.query.page)
+    const limit = parseInt(req.query.limit)
+    const skipIndex = (page - 1) * limit
+    const results = {}
     try {
       results.results = await Song.find()
         .sort({ _id: 1 })
         .limit(limit)
         .skip(skipIndex)
-        .exec();
-      res.paginatedResults = results;
-      next();
+        .exec()
+      res.paginatedResults = results
+      next()
     } catch (e) {
-      res.status(500).json({ message: "Error Occured" });
+      res.status(500).json({ message: 'Error Occured' })
     }
-  };
+  }
+}
+
+app.get('/api/songsearch', searchResults(), (req, res) => {
+  res.json(res.searchResults)
+})
+
+function searchResults() {
+  return async (req, res, next) => {
+    const page = parseInt(req.query.page)
+    const limit = parseInt(req.query.limit)
+    const skipIndex = (page - 1) * limit
+    const results = {}
+    console.log("Search Term 111: ",req.query.searchTerm)
+    let term = req.query.searchTerm
+    // console.log("re.body here: ", req.body)
+    // console.log("Term here: ", term)
+    try {
+      results.results = await Song.find({
+        "$or":[
+        {artist_name:{'$regex' : term, '$options' : 'i'}},
+        {track_name:{'$regex' : term, '$options' : 'i'}},
+        {genre:{'$regex' : term, '$options' : 'i'}}
+      ]})
+        .sort({ _id: 1 })
+        .limit(limit)
+        .skip(skipIndex)
+        .exec()
+      res.searchResults = results
+      // console.log(res.searchResults)
+      next()
+
+    } catch (e) {
+      res.status(500).json({ message: 'Error Occured' })
+    }
+  }
 }
 
 
@@ -129,7 +164,6 @@ app.get('/api/bio', async (req, res) => {
   }
 })
 
-
 // update profile photo
 app.patch('/api/profile-photo', async (req, res) => {
   const token = req.headers['x-access-token']
@@ -182,7 +216,6 @@ app.delete('/api/delete-profile', async (req, res) => {
   }
 })
 
-
 // post to favourites
 
 app.patch('/api/addfavourite', async (req, res) => {
@@ -200,11 +233,6 @@ app.patch('/api/addfavourite', async (req, res) => {
   }
 })
 
-
-
-
-
 app.listen(1337, () => {
   console.log('Server started on 1337')
 })
-
