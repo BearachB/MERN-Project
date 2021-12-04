@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [bio, setBio] = useState('')
   const [tempBio, setTempBio] = useState('')
   const [photo, setPhoto] = useState('')
+  const [name, setName] = useState('')
 
   async function populateBio() {
     const req = await fetch('http://localhost:1337/api/bio', {
@@ -54,6 +55,22 @@ loadImage()
     }
   })
 
+  async function getName() {
+    const req = await fetch('http://localhost:1337/api/bio', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+
+    const data = await req.json()
+    if (data.status === 'ok') {
+      setName(data.name)
+    } else {
+      alert(data.error)
+    }
+  }
+  getName()
+
   async function updateBio(event) {
     event.preventDefault()
 
@@ -76,13 +93,6 @@ loadImage()
       alert(data.error)
     }
   }
-
-  function handleLogOut() {
-    localStorage.setItem('token', '')
-    localStorage.clear()
-    navigate('../login/', { replace: true })
-  }
-
 
   async function  handleDelete(event) {
 
@@ -109,23 +119,14 @@ loadImage()
 
   return (
     <div class="profile-content">
-      <h1>Your Bio: {bio || 'No bio found'}</h1>
-      <img src={photo} alt={photo} width="100"  style={{'borderRadius':'200px'}}/>
-      <form id='bio_form' onSubmit={updateBio}>
-        <input
-          id='bio_input'
-          type="text"
-          placeholder="Bio"
-          value={tempBio}
-          onChange={(e) => setTempBio(e.target.value)}
-        />
-        {/* <input type="submit" value="Update quote" /> */}
-      </form>
-      <button type="button" onClick={updateBio}>Update Bio</button>
+      <h1>Hello  {name || 'No bio found'}</h1>
+      <img src={photo} alt={photo} width="100" style={{'borderRadius':'200px'}}/>
       <br/>
-      <button type="button" onClick={handleLogOut}>Log Out</button>
+      <br/>
+      <p>{bio || "You have not written a bio yet. Click Update Profile below to add one"}   </p>
       <br/>
       <Link to="/editprofile"><button>Update Profile</button></Link>
+
       <br/>
       <button type="button" onClick={handleDelete}>Delete Account</button>
     </div>

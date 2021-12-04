@@ -9,8 +9,6 @@ function App() {
 
   async function resetPassword(event) {
     event.preventDefault()
-    console.log(password)
-
     const response = await fetch('http://localhost:1337/api/reset-password', {
       method: 'PATCH',
       headers: {
@@ -23,10 +21,10 @@ function App() {
     })
 
     const data = await response.json()
-    console.log(data.status)
 
     if (data.status === 'ok') {
-      navigate('/dashboard')
+      alert("Password Reset!")
+      navigate('/editprofile')
     }
   }
 
@@ -48,12 +46,6 @@ function App() {
 }
 
 export default App
-
-
-
-
-
-
 
 
 

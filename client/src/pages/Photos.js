@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 function App() {
 
@@ -47,10 +47,9 @@ function App() {
         console.log(data)
     
         if (data.status === 'ok') {
-          navigate('/dashboard')
+          navigate('/editprofile')
         }
       }
-
 
 
    return (
@@ -71,6 +70,7 @@ function App() {
                     
                 )
             }
+            <Link to="/editprofile"><button>Back To Edit Profile</button></Link>
         </div>
    )
 
