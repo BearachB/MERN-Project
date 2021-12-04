@@ -8,8 +8,15 @@ import {
   Navbar,
   NavDropdown,
 } from 'react-bootstrap'
+// import { useNavigate} from 'react-router-dom'
+
 
 const Header = () => {
+
+  function handleLogOut() {
+    localStorage.setItem('token', '')
+    localStorage.clear()
+  }
   return (
     <div>
       {/* Navbar structure taken from https://react-bootstrap.github.io/components/navbar/*/}
@@ -32,7 +39,7 @@ const Header = () => {
                   Profile
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/logout">
+                <NavDropdown.Item onClick={handleLogOut} href="/login">
                   Sign Out
                 </NavDropdown.Item>
               </NavDropdown>

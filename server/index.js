@@ -43,6 +43,46 @@ function paginatedResults() {
 
 
 
+
+// app.get("/api/allsongs", allResults(), (req, res) => {
+//   res.json(res.paginatedResults);
+// });
+
+// // https://betterprogramming.pub/build-a-paginated-api-using-node-js-express-and-mongodb-227ed5dc2b4b
+// function allResults() {
+//   return async (req, res, next) => {
+//     const page = parseInt(req.query.page);
+//     const limit = parseInt(req.query.limit);
+//     const skipIndex = (page - 1) * limit;
+//     const results = {};
+//     try {
+//       results.results = await Song.find()
+//         .sort({ _id: 1 })
+//         .limit(limit)
+//         .skip(skipIndex)
+//         .exec();
+//       res.paginatedResults = results;
+//       next();
+//     } catch (e) {
+//       res.status(500).json({ message: "Error Occured" });
+//     }
+//   };
+// }
+
+
+// app.get('/api/allsongs', async (req, res) => {
+
+//   try {
+//     const results = await Song.find()
+
+//     return res.json({ status: 'ok', bio: user.bio, image: user.image, favourites: user.favourites })
+//   } catch (error) {
+//     console.log(error)
+//     res.json({ status: 'error', error: 'invalid token' })
+//   }
+// })
+
+
 app.post('/api/register', async (req, res) => {
   console.log(req.body)
   try {
@@ -92,7 +132,7 @@ app.get('/api/bio', async (req, res) => {
     const email = decoded.email
     const user = await User.findOne({ email: email })
 
-    return res.json({ status: 'ok', bio: user.bio, image: user.image })
+    return res.json({ status: 'ok', bio: user.bio, image: user.image, favourites: user.favourites })
   } catch (error) {
     console.log(error)
     res.json({ status: 'error', error: 'invalid token' })
@@ -114,20 +154,21 @@ app.post('/api/bio', async (req, res) => {
   }
 })
 
-app.get('/api/bio', async (req, res) => {
-  const token = req.headers['x-access-token']
+// app.get('/api/bio', async (req, res) => {
+//   const token = req.headers['x-access-token']
 
-  try {
-    const decoded = jwt.verify(token, 'secret123')
-    const email = decoded.email
-    const user = await User.findOne({ email: email })
+//   try {
+//     const decoded = jwt.verify(token, 'secret123')
+//     const email = decoded.email
+//     const user = await User.findOne({ email: email })
+//     console.log(user)
 
-    return res.json({ status: 'ok', bio: user.bio, photo: user.photo })
-  } catch (error) {
-    console.log(error)
-    res.json({ status: 'error', error: 'invalid token' })
-  }
-})
+//     return res.json({ status: 'ok', bio: user.bio, photo: user.photo, favourites: user.favourites })
+//   } catch (error) {
+//     console.log(error)
+//     res.json({ status: 'error', error: 'invalid token' })
+//   }
+// })
 
 
 // update profile photo
@@ -191,8 +232,23 @@ app.patch('/api/addfavourite', async (req, res) => {
   try {
     const decoded = jwt.verify(token, 'secret123')
     const email = decoded.email
-    await User.updateOne({ email: email }, { $push: { favourites: req.body } })
+    await User.updateOne({ email: email }, { $push: { favourites: req.body.favourites } })
+    console.log(req.body.favourites)
+    return res.json({ status: 'ok' })
+  } catch (error) {
+    console.log(error)
+    res.json({ status: 'error', error: 'invalid token' })
+  }
+})
 
+app.patch('/api/removefavourite', async (req, res) => {
+  const token = req.headers['x-access-token']
+
+  try {
+    const decoded = jwt.verify(token, 'secret123')
+    const email = decoded.email
+    await User.updateOne({ email: email }, { $pull: { favourites: req.body.favourites } })
+    console.log(req.body.favourites)
     return res.json({ status: 'ok' })
   } catch (error) {
     console.log(error)
