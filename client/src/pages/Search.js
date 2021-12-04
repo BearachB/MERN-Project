@@ -133,7 +133,6 @@ function App() {
               <th>Track Name</th>
               <th>Popularity</th>
               <th>Genre</th>
-              <th>Track ID</th>
               <th>Favourite(★)</th>
             </tr>
           </thead>
@@ -152,6 +151,7 @@ function App() {
               <td onClick={() => SaveFavourites(info.track_name)}>☆</td>}
             </tr>
           ))}
+
           </tbody>
         </table>
       </div>

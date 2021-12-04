@@ -17,12 +17,12 @@ const Footer = () => (
         </Card.Header>
         <div id="footer-icon-grid">
           <p />
-          <FaSpotify />
-          <FaGithub />
-          <FaYoutube />
-          <FaLinkedin />
-          <FaFacebook />
-          <FaInstagram />
+          <a href="https://github.com/BearachB">{<FaGithub />}</a>
+          <a href="https://spotify.com" >{<FaSpotify />}</a>
+          <a href="https://youtube.com">{<FaYoutube />}</a>
+          <a href="https://linkedin.com">{<FaLinkedin />}</a>
+          <a href="https://facebook.com/">{<FaFacebook />}</a>
+          <a href="https://instagram.com/">{<FaInstagram />}</a>
         </div>
 
 

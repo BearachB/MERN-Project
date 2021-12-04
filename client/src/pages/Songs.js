@@ -60,11 +60,6 @@ function App() {
     setisLoaded(true)
   }
 
-
-
-  
-  
-
   const fetchFavourites = async () => {
     const req = await fetch('http://localhost:1337/api/bio', {
       headers: {
@@ -129,18 +124,12 @@ function App() {
 
 
 useEffect(() =>{
- 
   fetchFavourites()
 },[favourites])
  
 useEffect(() =>{
- 
   fetchSongs()
 },[page])
-
-
-  // console.log(favourites)
-
   
   return (
     // Main container for the results
@@ -156,7 +145,6 @@ useEffect(() =>{
             <th>Track Name</th>
             <th>Popularity</th>
             <th>Genre</th>
-            <th>Track ID</th>
             <th>Favourite(★)</th>
           </tr>
         </thead>
@@ -168,7 +156,6 @@ useEffect(() =>{
               <td>{info.track_name}</td>
               <td>{info.popularity}</td>
               <td>{info.genre}</td>
-              <td>{info.track_id}</td>
               {(favourites.includes(info.track_name))?
               <td onClick={() => removeFavourites(info.track_name)}>★</td>
               :

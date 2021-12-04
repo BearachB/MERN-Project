@@ -14,6 +14,7 @@ import Songs from './pages/Songs'
 import Search from './pages/Search'
 import { keepTheme } from './components/Themes'
 import FavPage from './pages/addfav'
+import Homepage from './pages/Homepage'
 
 const App = () => {
   useEffect(() => {
@@ -26,6 +27,7 @@ const App = () => {
       <main style={{ minHeight: '50px' }}></main>
       <BrowserRouter>
         <Routes>
+          <Route path="/" exact element={<Homepage />} />
           <Route path="/login" exact element={<Login />} />
           <Route path="/register" exact element={<Register />} />
           <Route path="/dashboard" exact element={<Dashboard />} />

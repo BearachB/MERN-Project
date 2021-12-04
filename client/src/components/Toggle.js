@@ -29,9 +29,12 @@ function Toggle() {
         <div className="container--toggle">
             {
                 togClass === "light" ?
-                <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick} checked />
+                <input type="submit" value="Dark Theme" id="toggle" className="toggle--checkbox" onClick={handleOnClick} checked />
                 :
-                <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick} />
+                // <input type="checkbox" id="toggle" className="toggle--checkbox" onClick={handleOnClick} />
+
+                <input type="submit" value="Light Theme" id="toggle" className="toggle--checkbox" onClick={handleOnClick} />
+
             }
             <label htmlFor="toggle" className="toggle--label">
                 <span className="toggle--label-background"></span>

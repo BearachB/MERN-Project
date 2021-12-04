@@ -34,10 +34,10 @@ const Header = () => {
             >
               <Nav.Link href="/search">Search</Nav.Link>
               <Nav.Link href="/songs">Song List</Nav.Link>
+              <Nav.Link href="/login">Log In</Nav.Link>
               <NavDropdown title="Account" id="navbarScrollingDropdown">
-
-                <NavDropdown.Item href="/fav-page">My Favourites</NavDropdown.Item>
-                <NavDropdown.Item href="/dashboard">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/dashboard">My Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/fav-list">My Favourites</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={handleLogOut} href="/login">
                   Sign Out
@@ -45,6 +45,7 @@ const Header = () => {
               </NavDropdown>
               <br/>
               {/* <Nav.Link href="#"> */}
+                <button>Change Theme</button>
                 <Toggle/>
 
               {/* </Nav.Link> */}

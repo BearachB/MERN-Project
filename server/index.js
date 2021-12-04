@@ -13,8 +13,6 @@ app.use(express.json())
 mongoose.connect(
   'mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority',
 )
-// mongoose.connect('mongodb://localhost:27017/user-info')
-// mongoose.connect('mongodb://localhost:27017/full-mern-stack')
 
 app.get('/api/songs', paginatedResults(), (req, res) => {
   res.json(res.paginatedResults)
