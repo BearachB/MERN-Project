@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {ObjectId} = mongoose.Schema; 
+// const {ObjectId} = mongoose.Schema; 
 // const Song = require('./song_model')
 // Definition of the user schema
 const User = new mongoose.Schema(
@@ -12,8 +12,8 @@ const User = new mongoose.Schema(
     phoneNo: {type: Number},
     image: {type: String, default: "https://res.cloudinary.com/webapps259/image/upload/v1638360127/mernproject/uvpdztcmvjjblahgpfru.jpg"},
     // t: {type: String, default:"t"},
-    favourites: [{type: ObjectId, ref: "SongData"}]
-  
+    // favourites: [{type: ObjectId, ref: "SongData"}]
+    favourites: {type: Array, default: []}  
   },
   { collection: 'user_data' },
 )

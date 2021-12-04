@@ -11,6 +11,7 @@ import './App.css'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Songs from './pages/Songs'
+import FavPage from './pages/addfav'
 
 
 const App = () => {
@@ -28,6 +29,8 @@ const App = () => {
           <Route path="/photos" exact element={<Photos />} />
           <Route path="/songs" exact element={<Songs />} />
           <Route path="/forgot-password" exact element={<ForgotPassword />} />
+          <Route path="/fav-page" exact element={<FavPage />} />
+
         </Routes>
       </BrowserRouter>
       <Footer />
