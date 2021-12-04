@@ -59,7 +59,8 @@ function App() {
     setSongs(data.results)
     setisLoaded(true)
   }
-  fetchSongs()
+
+
 
   
   
@@ -181,6 +182,9 @@ useEffect(() =>{
           <thead></thead>
           <tbody>
             <tr>
+              
+              { page !== 1? (
+                <>
               <td class="pageButton">
                 <button onClick={previousPage}>🡸</button>
               </td>
@@ -188,6 +192,19 @@ useEffect(() =>{
               <td>
                 <button onClick={nextPage}>🡺</button>
               </td>
+              </>
+              )
+              : (
+                <>
+                <td class="pageButton">
+              </td>
+              <td>{displayResNumber()}</td>
+              <td>
+                <button onClick={nextPage}>🡺</button>
+              </td>
+              </>
+              )     
+               }
             </tr>
           </tbody>
         </table>

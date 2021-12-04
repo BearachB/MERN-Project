@@ -36,7 +36,6 @@ const Header = () => {
               <Nav.Link href="/songs">Song List</Nav.Link>
               <Nav.Link href="/login">Log In</Nav.Link>
               <NavDropdown title="Account" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">My Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/dashboard">Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={handleLogOut} href="/login">

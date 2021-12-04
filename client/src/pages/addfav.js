@@ -126,7 +126,7 @@ fetchSongs()
         </tbody>
      </table>
   </> 
-        ): <h2>You Have No Songs in Your Favourites</h2>
+        ): <h2>No Songs Match Your Search</h2>
         ) : null }
     </div>
   )
