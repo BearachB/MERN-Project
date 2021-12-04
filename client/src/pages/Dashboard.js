@@ -51,7 +51,6 @@ loadImage()
         navigate('../login/', { replace: true })
       } else {
         populateBio()
-        // updatePhoto()
       }
     }
   })
@@ -71,7 +70,6 @@ loadImage()
     }
   }
   getName()
-
 
   async function updateBio(event) {
     event.preventDefault()
@@ -128,7 +126,7 @@ loadImage()
       <p>{bio || "You have not written a bio yet. Click Update Profile below to add one"}   </p>
       <br/>
       <Link to="/editprofile"><button>Update Profile</button></Link>
-      
+
       <br/>
       <button type="button" onClick={handleDelete}>Delete Account</button>
     </div>

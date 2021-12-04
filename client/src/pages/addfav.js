@@ -89,7 +89,7 @@ fetchSongs()
   return (
     // Main container for the results
     <div className="container">
-      <h1>Favourites</h1>
+      <u><h1>Favourites</h1></u>
       { isLoaded ? (
         favourites.length !==0 ? (
         <>
@@ -99,9 +99,9 @@ fetchSongs()
           <tr>
             <th>Artist</th>
             <th>Track Name</th>
-            <th>Popularity</th>
+            <th style={{textAlign:"center"}}>Popularity</th>
             <th>Genre</th>
-            <th>Favourite(★)</th>
+            <th style={{textAlign:"center"}}>Favourite(★)</th>
           </tr>
         </thead>
         {/* Table head */}
@@ -113,9 +113,9 @@ fetchSongs()
               <>
               <td>{info.artist_name}</td>
               <td>{info.track_name}</td>
-              <td>{info.popularity}</td>
+              <td style={{textAlign:"center"}}>{info.popularity}</td>
               <td>{info.genre}</td>
-              <td onClick={() => removeFavourites(info.track_name)}>★</td>
+              <td style={{textAlign:"center"}} onClick={() => removeFavourites(info.track_name)}>★</td>
               </>
               ): (<></>) }     
             </tr> )
@@ -124,7 +124,7 @@ fetchSongs()
         </tbody>
      </table>
   </> 
-        ): <h2>No Songs Match Your Search</h2>
+        ): <h2>You Have No Songs in Your Favourites. <br /> Try adding some by searching for songs.</h2>
         ) : null }
     </div>
   )
