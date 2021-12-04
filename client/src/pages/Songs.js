@@ -60,9 +60,6 @@ function App() {
     setisLoaded(true)
   }
 
-  
-  
-
   const fetchFavourites = async () => {
     const req = await fetch('http://localhost:1337/api/bio', {
       headers: {
@@ -172,6 +169,9 @@ useEffect(() =>{
           <thead></thead>
           <tbody>
             <tr>
+              
+              { page !== 1? (
+                <>
               <td class="pageButton">
                 <button onClick={previousPage}>🡸</button>
               </td>
@@ -179,6 +179,19 @@ useEffect(() =>{
               <td>
                 <button onClick={nextPage}>🡺</button>
               </td>
+              </>
+              )
+              : (
+                <>
+                <td class="pageButton">
+              </td>
+              <td>{displayResNumber()}</td>
+              <td>
+                <button onClick={nextPage}>🡺</button>
+              </td>
+              </>
+              )     
+               }
             </tr>
           </tbody>
         </table>
