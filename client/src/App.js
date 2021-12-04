@@ -13,6 +13,7 @@ import Footer from './components/Footer/Footer'
 import Songs from './pages/Songs'
 import Search from './pages/Search'
 import { keepTheme } from './components/Themes'
+import FavPage from './pages/addfav'
 
 const App = () => {
   useEffect(() => {
@@ -34,6 +35,8 @@ const App = () => {
           <Route path="/songs" exact element={<Songs />} />
           <Route path="/search" exact element={<Search />} />
           <Route path="/forgot-password" exact element={<ForgotPassword />} />
+          <Route path="/fav-page" exact element={<FavPage />} />
+
         </Routes>
       </BrowserRouter>
       <Footer />

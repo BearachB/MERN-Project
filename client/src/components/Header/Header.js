@@ -8,10 +8,17 @@ import {
   Navbar,
   NavDropdown,
 } from 'react-bootstrap'
+// import { useNavigate} from 'react-router-dom'
+
 
 import Toggle from '../Toggle'
 
 const Header = () => {
+
+  function handleLogOut() {
+    localStorage.setItem('token', '')
+    localStorage.clear()
+  }
   return (
     <div>
       {/* Navbar structure taken from https://react-bootstrap.github.io/components/navbar/*/}
@@ -32,7 +39,9 @@ const Header = () => {
                 <NavDropdown.Item href="#action3">My Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/dashboard">Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/logout">Sign Out</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogOut} href="/login">
+                  Sign Out
+                </NavDropdown.Item>
               </NavDropdown>
               <br/>
               {/* <Nav.Link href="#"> */}
