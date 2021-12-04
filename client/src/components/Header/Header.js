@@ -11,6 +11,8 @@ import {
 // import { useNavigate} from 'react-router-dom'
 
 
+import Toggle from '../Toggle'
+
 const Header = () => {
 
   function handleLogOut() {
@@ -22,7 +24,7 @@ const Header = () => {
       {/* Navbar structure taken from https://react-bootstrap.github.io/components/navbar/*/}
       <Navbar bg="light" expand="lg" bg="primary" variant="dark">
         <Container fluid>
-          <Navbar.Brand href="/">D&B's Nondescript App</Navbar.Brand>
+          <Navbar.Brand href="/">D&B's Music App</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -35,27 +37,19 @@ const Header = () => {
               <Nav.Link href="/login">Log In</Nav.Link>
               <NavDropdown title="Account" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">My Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/dashboard">
-                  Profile
-                </NavDropdown.Item>
+                <NavDropdown.Item href="/dashboard">Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={handleLogOut} href="/login">
                   Sign Out
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="#" disabled>
-                Link
-              </Nav.Link>
+              <br/>
+              {/* <Nav.Link href="#"> */}
+                <button>Change Theme</button>
+                <Toggle/>
+
+              {/* </Nav.Link> */}
             </Nav>
-            <Form className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>

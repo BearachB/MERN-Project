@@ -35,6 +35,9 @@ npm start
 
 FOR Connection to MongoDB Atlas Server:
 Connecting in Compass: mongodb+srv://<username>:<password>@cluster0.d4sre.mongodb.net/mern_project
-For Daragh: username="daragh"; password="mernproject"
-For Bearach: username="bearach"; password="mernproject"
+  For Daragh: username="daragh"; password="mernproject"
+    Connecting in Compass: mongodb+srv://daragh:mernproject@cluster0.d4sre.mongodb.net/mern_project
+
+  For Bearach: username="bearach"; password="mernproject"
+    Connecting in Compass: mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project
 
