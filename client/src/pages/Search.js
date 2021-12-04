@@ -9,6 +9,8 @@ function App() {
   const [PostSize, setPostSize] = useState()
   const [SearchTerm, setSearchTerms] = useState('')
   const [Skip, setSkip] = useState(0)
+  const [favourites, setFavourites] = useState([])
+  const [isLoaded, setisLoaded] = useState(false)
 
   const updateSearchTerms = (newSearchTerm) => {
     const variables = {
@@ -35,7 +37,76 @@ function App() {
     console.log('Search.js Search term here:', SearchTerm)
     const data = await result.json()
     setSongs(data.results)
+    setisLoaded(true)
   }
+
+  const fetchFavourites = async () => {
+    const req = await fetch('http://localhost:1337/api/bio', {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      },
+    })
+
+    const data = await req.json()
+    if (data.status === 'ok') {
+      
+    setFavourites(data.favourites)
+
+  //  console.log(favourites)
+      
+      
+    } else {
+      alert(data.error)
+    }
+   }
+
+
+   const SaveFavourites = async (newFav) => {
+    const res = await fetch('http://localhost:1337/api/addfavourite', {
+    method: "PATCH",
+    headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            favourites : newFav
+          }),
+    })
+    // console.log(image)
+    const data = await res.json()
+    console.log(data)
+
+    // if (data.status === 'ok') {
+    //   navigate('/dashboard')
+    // }
+  }
+
+  const removeFavourites = async (Fav) => {
+    const res = await fetch('http://localhost:1337/api/removefavourite', {
+    method: "PATCH",
+    headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            favourites : Fav
+          }),
+    })
+    // console.log(image)
+    const data = await res.json()
+    console.log(data)
+
+    // if (data.status === 'ok') {
+    //   navigate('/dashboard')
+    // }
+  }
+
+
+  useEffect(() =>{
+ 
+    fetchFavourites()
+  },[favourites])
+
 
   useEffect(() => {
     fetchSongs(SearchTerm)
@@ -51,6 +122,8 @@ function App() {
         <br />
       </div>
       <h2>Search Results</h2>
+      { isLoaded ? (
+       songs.length !==0 ? (
       <div className="container">
         <table>
           {/* Table head */}
@@ -66,19 +139,24 @@ function App() {
           </thead>
           {/* Table Body */}
           <tbody>
-            {songs.map((info) => (
-              <tr>
-                <td>{info.artist_name}</td>
-                <td>{info.track_name}</td>
-                <td>{info.popularity}</td>
-                <td>{info.genre}</td>
-                <td>{info.track_id}</td>
-                <td>☆★</td>
-              </tr>
-            ))}
+          {songs.map((info) => (
+            <tr>
+              <td>{info.artist_name}</td>
+              <td>{info.track_name}</td>
+              <td>{info.popularity}</td>
+              <td>{info.genre}</td>
+              <td>{info.track_id}</td>
+              {(favourites.includes(info.track_name))?
+              <td onClick={() => removeFavourites(info.track_name)}>★</td>
+              :
+              <td onClick={() => SaveFavourites(info.track_name)}>☆</td>}
+            </tr>
+          ))}
           </tbody>
         </table>
       </div>
+      ): <h2>No Songs Match Your Search</h2>
+      ) : null }
     </div>
   )
 }
