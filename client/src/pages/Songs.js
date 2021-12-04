@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-// import Pagination from '../components/Pagination'
-
 function App() {
   const [songs, setSongs] = useState([])
   let [page, setPage] = useState(1)
@@ -70,10 +68,7 @@ function App() {
     const data = await req.json()
     if (data.status === 'ok') {
       
-    setFavourites(data.favourites)
-
-  //  console.log(favourites)
-      
+    setFavourites(data.favourites)      
       
     } else {
       alert(data.error)
@@ -92,13 +87,9 @@ function App() {
             favourites : newFav
           }),
     })
-    // console.log(image)
     const data = await res.json()
     console.log(data)
 
-    // if (data.status === 'ok') {
-    //   navigate('/dashboard')
-    // }
   }
 
   const removeFavourites = async (Fav) => {
@@ -112,13 +103,8 @@ function App() {
             favourites : Fav
           }),
     })
-    // console.log(image)
     const data = await res.json()
     console.log(data)
-
-    // if (data.status === 'ok') {
-    //   navigate('/dashboard')
-    // }
   }
 
 
@@ -136,16 +122,16 @@ useEffect(() =>{
     <div className="container">
       { isLoaded ? (
         <>
-      <h1>Song List</h1>
+      <u><h1>Song List</h1></u>
       <table>
         {/* Table head */}
         <thead>
           <tr>
             <th>Artist</th>
             <th>Track Name</th>
-            <th>Popularity</th>
+            <th style={{textAlign:"center"}}>Popularity</th>
             <th>Genre</th>
-            <th>Favourite(★)</th>
+            <th style={{textAlign:"center"}}>Favourite(★)</th>
           </tr>
         </thead>
         {/* Table head */}
@@ -154,28 +140,28 @@ useEffect(() =>{
             <tr>
               <td>{info.artist_name}</td>
               <td>{info.track_name}</td>
-              <td>{info.popularity}</td>
+              <td style={{textAlign:"center"}}>{info.popularity}</td>
               <td>{info.genre}</td>
               {(favourites.includes(info.track_name))?
-              <td onClick={() => removeFavourites(info.track_name)}>★</td>
+              <td style={{textAlign:"center"}} onClick={() => removeFavourites(info.track_name)}>★</td>
               :
-              <td onClick={() => SaveFavourites(info.track_name)}>☆</td>}
+              <td style={{textAlign:"center"}} onClick={() => SaveFavourites(info.track_name)}>☆</td>}
             </tr>
           ))}
         </tbody>
       </table>
       <div id="resultsPages">
-        <table>
+        <table class="pageNoTable">
           <thead></thead>
-          <tbody>
-            <tr>
+          <tbody class="pageNoTableBody">
+            <tr className="pageNoTableRow">
               
               { page !== 1? (
                 <>
               <td class="pageButton">
                 <button onClick={previousPage}>🡸</button>
               </td>
-              <td>{displayResNumber()}</td>
+              <td style={{width:"40px", verticalAlign:"middle"}}>{displayResNumber()}</td>
               <td>
                 <button onClick={nextPage}>🡺</button>
               </td>

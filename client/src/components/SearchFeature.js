@@ -13,13 +13,8 @@ function SearchFeature(props) {
   
   return (
     <div>
-      {/* <Search
-        value={searchTerms}
-        onChange={onChangeSearch}
-        placeholder="Type here to search"
-      /> */}
       <form>
-        <input 
+        <input className="searchBox"
         value={searchTerms}
         onChange={onChangeSearch}
         placeholder="Enter search term"/>

@@ -50,22 +50,9 @@ loadImage()
         navigate('../login/', { replace: true })
       } else {
         populateBio()
-        // updatePhoto()
       }
     }
   })
-
-  // async function updatePhoto(event) {
-  //   event.preventDefault()
-  //   const req = await fetch('http://localhost:1337/api/quote', {
-  //     method: 'POST',
-  //     headers: {
-  //       'x-access-token': localStorage.getItem('token'),
-  //     },
-  //     body: JSON.stringify({
-  //       quote: tempQuote,
-  //     }),
-  //   })
 
   async function updateBio(event) {
     event.preventDefault()
@@ -139,7 +126,6 @@ loadImage()
       <button type="button" onClick={handleLogOut}>Log Out</button>
       <br/>
       <Link to="/editprofile"><button>Update Profile</button></Link>
-      {/* <button type="button" onClick={() => alert("Edit Account Information")}>Edit Account Information</button> */}
       <br/>
       <button type="button" onClick={handleDelete}>Delete Account</button>
     </div>

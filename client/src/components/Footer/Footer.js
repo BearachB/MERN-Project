@@ -13,21 +13,22 @@ const Footer = () => (
   <footer>
     <Card>
       <Card.Header>
-        Web Application Architectures - MERN Project
-        </Card.Header>
+        Web Application Architectures - MERN Project 
+        <br />
+        December 2021 Bearach Byrne & Daragh
+        Kneeshaw
+      </Card.Header>
+
+      <Card.Body>
         <div id="footer-icon-grid">
           <p />
           <a href="https://github.com/BearachB">{<FaGithub />}</a>
-          <a href="https://spotify.com" >{<FaSpotify />}</a>
+          <a href="https://spotify.com">{<FaSpotify />}</a>
           <a href="https://youtube.com">{<FaYoutube />}</a>
           <a href="https://linkedin.com">{<FaLinkedin />}</a>
           <a href="https://facebook.com/">{<FaFacebook />}</a>
           <a href="https://instagram.com/">{<FaInstagram />}</a>
         </div>
-
-
-      <Card.Body>
-        <footer>&copy; 2021 Bearach Byrne & Daragh Kneeshaw</footer>
       </Card.Body>
     </Card>
   </footer>

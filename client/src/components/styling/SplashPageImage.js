@@ -4,12 +4,47 @@ import '../../bootstrap.min.css'
 const BackgroundImagePage = () => {
   return (
     <div className="bg">
-      <div>
-        <button>Log In</button>
-        <button>Create Account</button>
-        <button>Song List</button>
-        <button>Search</button>
-        <button>Light/Dark Theme</button>
+      <div class="homepage-buttons">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault()
+            window.location.href = '/login'
+          }}
+        >
+          Log In
+        </button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault()
+            window.location.href = '/register'
+          }}
+        >
+          Register for an Account
+        </button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault()
+            window.location.href = '/songs'
+          }}
+        >
+          Song List
+        </button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault()
+            window.location.href = '/search'
+          }}
+        >
+          Search
+        </button>
       </div>
     </div>
   )

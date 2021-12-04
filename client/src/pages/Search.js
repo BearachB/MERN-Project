@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import SearchFeature from '../components/SearchFeature'
-import { Input } from 'antd'
 
 function App() {
   const [songs, setSongs] = useState([])
   const [Filters, setFilters] = useState('')
   const [Limit, setLimit] = useState(100)
-  const [PostSize, setPostSize] = useState()
   const [SearchTerm, setSearchTerms] = useState('')
   const [Skip, setSkip] = useState(0)
   const [favourites, setFavourites] = useState([])
@@ -24,13 +22,10 @@ function App() {
     setSearchTerms(newSearchTerm)
     fetchSongs(newSearchTerm)
     console.log('Fetching songs')
-    // console.log(variables)
-    // console.log("Search term: ",SearchTerm)
     console.log('Search.js Search term here:', newSearchTerm)
   }
 
   const fetchSongs = async (SearchTerm) => {
-    // console.log("Update search terms: ", updateSearchTerms)
     const result = await fetch(
       `http://localhost:1337/api/songsearch?page=1&limit=100&searchTerm=${SearchTerm}`,
     )
@@ -50,10 +45,7 @@ function App() {
     const data = await req.json()
     if (data.status === 'ok') {
       
-    setFavourites(data.favourites)
-
-  //  console.log(favourites)
-      
+    setFavourites(data.favourites)      
       
     } else {
       alert(data.error)
@@ -72,13 +64,8 @@ function App() {
             favourites : newFav
           }),
     })
-    // console.log(image)
     const data = await res.json()
     console.log(data)
-
-    // if (data.status === 'ok') {
-    //   navigate('/dashboard')
-    // }
   }
 
   const removeFavourites = async (Fav) => {
@@ -92,13 +79,9 @@ function App() {
             favourites : Fav
           }),
     })
-    // console.log(image)
     const data = await res.json()
     console.log(data)
 
-    // if (data.status === 'ok') {
-    //   navigate('/dashboard')
-    // }
   }
 
 
@@ -112,16 +95,15 @@ function App() {
     fetchSongs(SearchTerm)
   }, [SearchTerm])
 
-  // fetchSongs()
   return (
     // Main container for the results
     <div>
       <div>
-        <h1>Song Search</h1>
+        <u><h1>Song Search</h1></u>
         <SearchFeature refreshFunction={updateSearchTerms} />
         <br />
       </div>
-      <h2>Search Results</h2>
+      <h2>Search Results:</h2>
       { isLoaded ? (
        songs.length !==0 ? (
       <div className="container">
@@ -131,9 +113,9 @@ function App() {
             <tr>
               <th>Artist</th>
               <th>Track Name</th>
-              <th>Popularity</th>
+              <th style={{textAlign:"center"}}>Popularity</th>
               <th>Genre</th>
-              <th>Favourite(★)</th>
+              <th style={{textAlign:"center"}}>Favourite(★)</th>
             </tr>
           </thead>
           {/* Table Body */}
@@ -142,13 +124,12 @@ function App() {
             <tr>
               <td>{info.artist_name}</td>
               <td>{info.track_name}</td>
-              <td>{info.popularity}</td>
+              <td style={{textAlign:"center"}}>{info.popularity}</td>
               <td>{info.genre}</td>
-              <td>{info.track_id}</td>
               {(favourites.includes(info.track_name))?
-              <td onClick={() => removeFavourites(info.track_name)}>★</td>
+              <td style={{textAlign:"center"}} onClick={() => removeFavourites(info.track_name)}>★</td>
               :
-              <td onClick={() => SaveFavourites(info.track_name)}>☆</td>}
+              <td style={{textAlign:"center"}} onClick={() => SaveFavourites(info.track_name)}>☆</td>}
             </tr>
           ))}
 
@@ -157,6 +138,7 @@ function App() {
       </div>
       ): <h2>No Songs Match Your Search</h2>
       ) : null }
+      <br/>
     </div>
   )
 }
