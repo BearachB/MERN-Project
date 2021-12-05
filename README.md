@@ -4,14 +4,14 @@
 
 ##Installation Assumptions:
 Windows 10 machine (should also work on Mac/Linux).
-npm version v8.1.0 is installed
+npm version v8.1.0 is installed - This will be needed to install the required dependencies. For a full list of dependencies, have a look at the package.json files in each folder (main project folder, server & client). 
 Node version v16.13.0 is installed
 
 
 ###If continuing to use MongoDB Atlas Server (Easiest Method):
 1. Clone files from Git - https://github.com/BearachB/MERN-Project.git
 2. Open overall folder in CLI.
-3. In overall folder install npm - "npm install",
+3. In overall folder install npm - "npm install". 
 4. CD into client folder and install npm - "cd .\client\" followed by “npm install”.
 5. CD into server folder and install npm - "cd .\server\" followed by “npm install”.
 6. In “client” CLI, “npm start” to start the client server.
