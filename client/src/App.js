@@ -8,6 +8,7 @@ import ResetPassword from './pages/Reset-Password'
 import Photos from './pages/Photos'
 import ForgotPassword from './pages/ForgotPassword'
 import Header from './components/Header/Header'
+import HeaderNL from './components/Header/HeaderNotLoggedIn'
 import Footer from './components/Footer/Footer'
 import Songs from './pages/Songs'
 import Search from './pages/Search'
@@ -17,14 +18,29 @@ import Homepage from './pages/Homepage'
 import SongsNL from './pages/SongsNL'
 import SearchNL from './pages/SearchNL'
 
+
 const App = () => {
   useEffect(() => {
     keepTheme()
   })
 
-  return (
+  const token = localStorage.getItem('token')
+
+  // return (
+  //   <div>
+  //     {token? (
+  //     <Header />
+  //     ) : (
+  //     <HeaderNL />
+  //     )}
+
+    return (
     <div>
+      {token? (
       <Header />
+      ) : (
+      <HeaderNL />
+      )}
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Homepage />} />

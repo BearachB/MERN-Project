@@ -25,7 +25,6 @@ function App() {
       console.log("Login success")
       
       alert('Login successful')
-      
 
       window.location.href = '/dashboard'
     } else {
