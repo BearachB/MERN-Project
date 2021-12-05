@@ -18,6 +18,7 @@ app.get('/api/songs', paginatedResults(), (req, res) => {
   res.json(res.paginatedResults)
 })
 
+// Pagination method taken from below:
 // https://betterprogramming.pub/build-a-paginated-api-using-node-js-express-and-mongodb-227ed5dc2b4b
 function paginatedResults() {
   return async (req, res, next) => {
@@ -51,8 +52,6 @@ function searchResults() {
     const results = {}
     console.log("Search Term 111: ",req.query.searchTerm)
     let term = req.query.searchTerm
-    // console.log("re.body here: ", req.body)
-    // console.log("Term here: ", term)
     try {
       results.results = await Song.find({
         "$or":[
@@ -73,47 +72,6 @@ function searchResults() {
     }
   }
 }
-
-
-
-
-// app.get("/api/allsongs", allResults(), (req, res) => {
-//   res.json(res.paginatedResults);
-// });
-
-// // https://betterprogramming.pub/build-a-paginated-api-using-node-js-express-and-mongodb-227ed5dc2b4b
-// function allResults() {
-//   return async (req, res, next) => {
-//     const page = parseInt(req.query.page);
-//     const limit = parseInt(req.query.limit);
-//     const skipIndex = (page - 1) * limit;
-//     const results = {};
-//     try {
-//       results.results = await Song.find()
-//         .sort({ _id: 1 })
-//         .limit(limit)
-//         .skip(skipIndex)
-//         .exec();
-//       res.paginatedResults = results;
-//       next();
-//     } catch (e) {
-//       res.status(500).json({ message: "Error Occured" });
-//     }
-//   };
-// }
-
-
-// app.get('/api/allsongs', async (req, res) => {
-
-//   try {
-//     const results = await Song.find()
-
-//     return res.json({ status: 'ok', bio: user.bio, image: user.image, favourites: user.favourites })
-//   } catch (error) {
-//     console.log(error)
-//     res.json({ status: 'error', error: 'invalid token' })
-//   }
-// })
 
 
 app.post('/api/register', async (req, res) => {
@@ -157,9 +115,6 @@ app.post('/api/login', async (req, res) => {
   }
 })
 
-
-
-
 app.get('/api/bio', async (req, res) => {
   const token = req.headers['x-access-token']
 
@@ -190,23 +145,7 @@ app.post('/api/bio', async (req, res) => {
   }
 })
 
-// app.get('/api/bio', async (req, res) => {
-//   const token = req.headers['x-access-token']
-
-//   try {
-//     const decoded = jwt.verify(token, 'secret123')
-//     const email = decoded.email
-//     const user = await User.findOne({ email: email })
-//     console.log(user)
-
-//     return res.json({ status: 'ok', bio: user.bio, photo: user.photo, favourites: user.favourites })
-//   } catch (error) {
-//     console.log(error)
-//     res.json({ status: 'error', error: 'invalid token' })
-//   }
-// })
-
-// update profile photo
+// Update profile photo
 app.patch('/api/profile-photo', async (req, res) => {
   const token = req.headers['x-access-token']
 
@@ -221,13 +160,6 @@ app.patch('/api/profile-photo', async (req, res) => {
     res.json({ status: 'error', error: 'invalid token' })
   }
 })
-
-// app.patch('/api/reset-password', async (req,res) => {
-//   const token = req.headers['x-access-token']
-//   console.log(token)
-//   try{
-//     const newPassword = await bcrypt.hash(req.body.password, 2)
-//     // console.log(newPassword)
 
 app.patch('/api/reset-password', async (req, res) => {
   const token = req.headers['x-access-token']
@@ -258,8 +190,7 @@ app.delete('/api/delete-profile', async (req, res) => {
   }
 })
 
-// post to favourites
-
+// Add to favourites
 app.patch('/api/addfavourite', async (req, res) => {
   const token = req.headers['x-access-token']
 
@@ -275,6 +206,7 @@ app.patch('/api/addfavourite', async (req, res) => {
   }
 })
 
+// Remove from favourites
 app.patch('/api/removefavourite', async (req, res) => {
   const token = req.headers['x-access-token']
 

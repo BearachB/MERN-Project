@@ -111,6 +111,10 @@ html, #root {
   font-size: 4vw;
 }
 
+#dashboardBio {
+  font-size: large;
+}
+
 nav {
   background-color: var(--dark-background);
   color: var(--light-text);
@@ -389,7 +393,7 @@ table {
 }
 
 .pageNoTable {
-  width: 40%;
+  width: 60%;
   text-align: center;
   text-justify:auto ;
   justify-content: center;
@@ -3304,8 +3308,12 @@ textarea.form-control-lg {
   grid-row-gap: 10px;
 }
 
+.dashboard-buttons {
+  padding: 1%;
+}
+
 .btn-primary {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: #FFFFFF;
   background-color: #2c3e50;
