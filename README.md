@@ -7,6 +7,7 @@ Windows 10 machine (should also work on Mac/Linux).
 npm version v8.1.0 is installed
 Node version v16.13.0 is installed
 
+
 ###If continuing to use MongoDB Atlas Server (Easiest Method):
 1. Clone files from Git - https://github.com/BearachB/MERN-Project.git
 2. Open overall folder in CLI.
@@ -16,6 +17,7 @@ Node version v16.13.0 is installed
 6. In “client” CLI, “npm start” to start the client server.
 7. In “server” CLI, “npm run dev” to start the backend server.
 8. The web. app. will now open in your default browser.
+
 
 ###If using a local MongoDB server (Harder method):
 1. Clone files from Git.
@@ -34,7 +36,6 @@ Node version v16.13.0 is installed
 14. The web. app. will now open in your default browser.
 
 
-
-FOR Connection to MongoDB Atlas Server:
+FOR Connection to MongoDB Atlas Server using MongoDB Compass to inspect database:
       username="bearach"; password="mernproject"
       Connecting in Compass: mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project
