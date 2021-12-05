@@ -114,21 +114,17 @@ loadImage()
     }
   }
 
-
-  
-
   return (
     <div class="profile-content">
       <h1>Hello  {name || 'No bio found'}</h1>
-      <img src={photo} alt={photo} width="100" style={{'borderRadius':'200px'}}/>
+      <img src={photo} alt={photo} width="200" style={{'borderRadius':'300px'}}/>
       <br/>
       <br/>
-      <p>{bio || "You have not written a bio yet. Click Update Profile below to add one"}   </p>
+      <p id="dashboardBio">{bio || "You have not written a bio yet. Click Update Profile below to add one!"}</p>
       <br/>
-      <Link to="/editprofile"><button>Update Profile</button></Link>
-
+      <Link to="/editprofile"><button class="btn btn-primary">Update Profile</button></Link>
       <br/>
-      <button type="button" onClick={handleDelete}>Delete Account</button>
+      <button class="btn btn-primary" type="button" onClick={handleDelete}>Delete Account</button>
     </div>
   )
   }

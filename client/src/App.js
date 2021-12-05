@@ -7,7 +7,6 @@ import EditProfile from './pages/EditProfile'
 import ResetPassword from './pages/Reset-Password'
 import Photos from './pages/Photos'
 import ForgotPassword from './pages/ForgotPassword'
-// import './App.css'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Songs from './pages/Songs'
@@ -26,7 +25,6 @@ const App = () => {
   return (
     <div>
       <Header />
-      <main style={{ minHeight: '50px' }}></main>
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Homepage />} />
@@ -42,7 +40,6 @@ const App = () => {
           <Route path="/fav-page" exact element={<FavPage />} />
           <Route path="/songs-nl" exact element={<SongsNL />} />
           <Route path="/search-nl" exact element={<SearchNL />} />
-
         </Routes>
       </BrowserRouter>
       <Footer />
