@@ -5,6 +5,7 @@ const Homepage = () => {
 
   return (
     <div class="homepage-content">
+      {/* The homepage content was added via the SplashPageImage component  */}
       <div classname="background-image">
         <SplashPageImage />
       </div>
