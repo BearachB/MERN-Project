@@ -3,8 +3,8 @@ import SearchFeature from '../components/SearchFeature'
 
 function App() {
   const [songs, setSongs] = useState([])
-  const [Filters, setFilters] = useState('')
-  const [Limit, setLimit] = useState(100)
+  const Filters = ''
+  const Limit = 100
   const [SearchTerm, setSearchTerms] = useState('')
   const [Skip, setSkip] = useState(0)
  
@@ -29,7 +29,6 @@ function App() {
     const result = await fetch(
       `http://localhost:1337/api/songsearch?page=1&limit=100&searchTerm=${SearchTerm}`,
     )
-    console.log('Search.js Search term here:', SearchTerm)
     const data = await result.json()
     setSongs(data.results)
     setisLoaded(true)
@@ -66,8 +65,8 @@ function App() {
           </thead>
           {/* Table Body */}
           <tbody>
-          {songs.map((info) => (
-            <tr>
+          {songs.map((info,i) => (
+                <tr key={i}>
               <td>{info.artist_name}</td>
               <td>{info.track_name}</td>
               <td style={{textAlign:"center"}}>{info.popularity}</td>

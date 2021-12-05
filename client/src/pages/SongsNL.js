@@ -81,8 +81,8 @@ useEffect(() =>{
         </thead>
         {/* Table head */}
         <tbody>
-          {songs.map((info) => (
-            <tr>
+        {songs.map((info,i) => (
+                <tr key={i}>
               <td>{info.artist_name}</td>
               <td>{info.track_name}</td>
               <td style={{textAlign:"center"}}>{info.popularity}</td>
