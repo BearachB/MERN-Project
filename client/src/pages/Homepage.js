@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import SplashPageImage from '../components/styling/SplashPageImage'
 
 const Homepage = () => {

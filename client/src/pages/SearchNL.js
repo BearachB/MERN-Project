@@ -17,7 +17,6 @@ function App() {
       filters: Filters,
       searchTerm: newSearchTerm,
     }
-    
     setSkip(0)
     setSearchTerms(newSearchTerm)
     fetchSongs(newSearchTerm)
@@ -34,8 +33,6 @@ function App() {
     setSongs(data.results)
     setisLoaded(true)
   }
-
-
 
   useEffect(() => {
     fetchSongs(SearchTerm)

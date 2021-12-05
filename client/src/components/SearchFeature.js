@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Input } from 'antd'
 
 // Search feature fucntion which passes the user input as props
 function SearchFeature(props) {
