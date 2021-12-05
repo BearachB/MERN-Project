@@ -8,6 +8,9 @@ function App() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+
+  // post fetch to register, send email, password and name
+
   async function registerUser(event) {
     event.preventDefault()
 
@@ -36,7 +39,7 @@ function App() {
       <form onSubmit={registerUser}>
         <input
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}  // input is set as nanme
           type="text"
           placeholder="Name"
         />

@@ -6,9 +6,11 @@ const EditProfile = () => {
   const navigate = useNavigate()
   const [bio, setBio] = useState('')
   const [tempBio, setTempBio] = useState('')
-  const [password, setPassword] = useState('')
+
   const [photo, setPhoto] = useState('')
 
+
+  // fetch bio to display
   async function populateBio() {
     const req = await fetch('http://localhost:1337/api/bio', {
       headers: {
@@ -23,7 +25,7 @@ const EditProfile = () => {
       alert(data.error)
     }
   }
-
+// fetch image to display
   async function loadImage() {
     const req = await fetch('http://localhost:1337/api/bio', {
       headers: {
@@ -53,29 +55,8 @@ const EditProfile = () => {
     }
   })
 
-  async function resetPassword(event) {
-    event.preventDefault()
-    console.log(password)
-
-    const response = await fetch('http://localhost:1337/api/reset-password', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token'),
-      },
-      body: JSON.stringify({
-        password,
-      }),
-    })
-
-    const data = await response.json()
-    console.log(data.status)
-
-    if (data.status === 'ok') {
-      navigate('/editprofile')
-    }
-  }
-
+  
+// update the bio
   async function updateBio(event) {
     event.preventDefault()
     const req = await fetch('http://localhost:1337/api/bio', {
@@ -91,8 +72,8 @@ const EditProfile = () => {
 
     const data = await req.json()
     if (data.status === 'ok') {
-      setBio(tempBio)
-      setTempBio('')
+      setBio(tempBio) // set state
+      setTempBio('') // set to ""
     } else {
       alert(data.error)
     }
