@@ -12,7 +12,7 @@ function App() {
 
   const updateSearchTerms = (newSearchTerm) => {
     const variables = {
-      skip: 0,
+      skip: Skip,
       limit: Limit,
       filters: Filters,
       searchTerm: newSearchTerm,
@@ -21,10 +21,10 @@ function App() {
     setSkip(0)
     setSearchTerms(newSearchTerm)
     fetchSongs(newSearchTerm)
-    console.log('Fetching songs')
-    console.log('Search.js Search term here:', newSearchTerm)
+
   }
 
+  // fetch the songs
   const fetchSongs = async (SearchTerm) => {
     const result = await fetch(
       `http://localhost:1337/api/songsearch?page=1&limit=100&searchTerm=${SearchTerm}`,
@@ -36,7 +36,7 @@ function App() {
   }
 
 
-
+// load songs when search term is changed
   useEffect(() => {
     fetchSongs(SearchTerm)
   }, [SearchTerm])
@@ -50,7 +50,7 @@ function App() {
         <br />
       </div>
       <h2>Search Results:</h2>
-      { isLoaded ? (
+      { isLoaded ? (          // show if loaded
        songs.length !==0 ? (
       <div className="container">
         <table>

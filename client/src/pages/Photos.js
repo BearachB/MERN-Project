@@ -6,16 +6,18 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [image, setImage] = useState('')
 
+
+//  uplod selected image to cloudinary
   const UploadImage = async (e) => {
     e.preventDefault()
 
     const files = e.target.files
     const data = new FormData()
-    data.append('file', files[0])
-    data.append('upload_preset', 'MernProject')
+    data.append('file', files[0]) // append the first file
+    data.append('upload_preset', 'MernProject') // upload to mernproject folder in
     setLoading(true)
-
-    const res = await fetch(
+// fetch post request to upload to cloudinary
+    const res = await fetch(   
       'https://api.cloudinary.com/v1_1/webapps259/image/upload',
       {
         method: 'POST',
@@ -30,6 +32,7 @@ function App() {
     setLoading(false)
   }
 
+  // function to save image to database, patch to favourites array in user
   const SaveImage = async (event) => {
     event.preventDefault()
 
@@ -43,9 +46,9 @@ function App() {
         image: image,
       }),
     })
-    console.log(image)
+    
     const data = await res.json()
-    console.log(data)
+  
 
     if (data.status === 'ok') {
       navigate('/editprofile')
@@ -64,7 +67,7 @@ function App() {
         onChange={UploadImage}
       />
 
-      {loading ? (
+      {loading ? (  // show save button when image has been uploaded to cloudinary
         <div>
           <br />
         </div>
@@ -89,27 +92,3 @@ function App() {
 }
 
 export default App
-
-// const uploadImage = (files) => {
-//     const formData = new FormData()
-//     formData.append("file", files[0])
-//     formData.append('upload_preset', "MernProject")
-
-//     fetch("https://api.cloudinary.com/v1_1/webapps259/image/upload", {
-//         method: 'POST',
-//         body: formData
-//       })
-//         .then(response => response.json())
-//         .then(data => {
-//           if (data.secure_url !== '') {
-//             this.setState({
-//               uploadedFileCloudinaryUrl: data.secure_url
-//             });
-//           }
-//         })
-//         .catch(err => console.error(err))
-//     }
-
-// return <div>
-//     <input type="file" onChange={(event)=>{uploadImage(event.target.files)} }/>
-// </div>

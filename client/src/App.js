@@ -6,7 +6,6 @@ import Dashboard from './pages/Dashboard'
 import EditProfile from './pages/EditProfile'
 import ResetPassword from './pages/Reset-Password'
 import Photos from './pages/Photos'
-import ForgotPassword from './pages/ForgotPassword'
 import Header from './components/Header/Header'
 import HeaderNL from './components/Header/HeaderNotLoggedIn'
 import Footer from './components/Footer/Footer'
@@ -21,22 +20,15 @@ import SearchNL from './pages/SearchNL'
 
 const App = () => {
   useEffect(() => {
-    keepTheme()
+    keepTheme()  // for dark/light theme
   })
 
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token')  // get token from local storage
 
-  // return (
-  //   <div>
-  //     {token? (
-  //     <Header />
-  //     ) : (
-  //     <HeaderNL />
-  //     )}
 
     return (
     <div>
-      {token? (
+      {token? (   // if the user is logged in, show specific header
       <Header />
       ) : (
       <HeaderNL />
@@ -52,7 +44,6 @@ const App = () => {
           <Route path="/photos" exact element={<Photos />} />
           <Route path="/songs" exact element={<Songs />} />
           <Route path="/search" exact element={<Search />} />
-          <Route path="/forgot-password" exact element={<ForgotPassword />} />
           <Route path="/fav-page" exact element={<FavPage />} />
           <Route path="/songs-nl" exact element={<SongsNL />} />
           <Route path="/search-nl" exact element={<SearchNL />} />

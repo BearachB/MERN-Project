@@ -60,7 +60,7 @@ function App() {
 
 
 useEffect(() =>{
-  fetchSongs()
+  fetchSongs() // eslint-disable-next-line
 },[page])
   
   return (

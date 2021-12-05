@@ -89,7 +89,7 @@ function App() {
       }),
     })
     const data = await res.json()
-    console.log(data)
+   
   }
 
   // Function allowing for removal of favourites
@@ -105,7 +105,7 @@ function App() {
       }),
     })
     const data = await res.json()
-    console.log(data)
+   
   }
 
   // Use effect function for the fetching of favourites 
@@ -115,7 +115,7 @@ function App() {
 
   // Use effect functionn for the fetching of songs
   useEffect(() => {
-    fetchSongs()
+    fetchSongs()  // eslint-disable-next-line
   }, [page])
 
   return (
