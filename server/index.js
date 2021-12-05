@@ -10,10 +10,10 @@ const bcrypt = require('bcryptjs')
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect(
+mongoose.connect(   // mongoose connection
   'mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority',
 )
-
+// get songs form db
 app.get('/api/songs', paginatedResults(), (req, res) => {
   res.json(res.paginatedResults)
 })
@@ -40,6 +40,8 @@ function paginatedResults() {
   }
 }
 
+
+// get request for search page
 app.get('/api/songsearch', searchResults(), (req, res) => {
   res.json(res.searchResults)
 })
@@ -50,12 +52,12 @@ function searchResults() {
     const limit = parseInt(req.query.limit)
     const skipIndex = (page - 1) * limit
     const results = {}
-    console.log("Search Term 111: ",req.query.searchTerm)
-    let term = req.query.searchTerm
+
+    let term = req.query.searchTerm    //term is what the user entered
     try {
       results.results = await Song.find({
         "$or":[
-        {artist_name:{'$regex' : term, '$options' : 'i'}},
+        {artist_name:{'$regex' : term, '$options' : 'i'}},  
         {track_name:{'$regex' : term, '$options' : 'i'}},
         {genre:{'$regex' : term, '$options' : 'i'}}
       ]})
@@ -64,7 +66,7 @@ function searchResults() {
         .skip(skipIndex)
         .exec()
       res.searchResults = results
-      // console.log(res.searchResults)
+     
       next()
 
     } catch (e) {
@@ -73,12 +75,11 @@ function searchResults() {
   }
 }
 
-
+// post request for registering
 app.post('/api/register', async (req, res) => {
-  console.log(req.body)
   try {
-    const newPassword = await bcrypt.hash(req.body.password, 2)
-    await User.create({
+    const newPassword = await bcrypt.hash(req.body.password, 2)  // hash the password
+    await User.create({    // create a user with below attributes
       name: req.body.name,
       email: req.body.email,
       password: newPassword,
@@ -89,18 +90,17 @@ app.post('/api/register', async (req, res) => {
   }
 })
 
+// post request for login
 app.post('/api/login', async (req, res) => {
   try{
   const user = await User.findOne({
     email: req.body.email,
   })
 
-  // if (!user) {
-  //   return { status: 'error', error: 'Invalid login' }
-  // }
+// compare hashed passwords
+  const isPasswordValid = await bcrypt.compare(req.body.password, user.password) 
 
-  const isPasswordValid = await bcrypt.compare(req.body.password, user.password)
-
+  // if password correct assign token to local storage
   if (isPasswordValid) {
     const token = jwt.sign(
       {
@@ -109,13 +109,13 @@ app.post('/api/login', async (req, res) => {
       },
       'secret123',
     )
-
     return res.json({ status: 'ok', user: token })
   }} catch (err) {
      res.json({ status: 'error', error: 'Invalid login', user: false })
   }
 })
 
+// get request for user info
 app.get('/api/bio', async (req, res) => {
   const token = req.headers['x-access-token']
 
@@ -126,11 +126,11 @@ app.get('/api/bio', async (req, res) => {
 
     return res.json({ status: 'ok', bio: user.bio, image: user.image, favourites: user.favourites, name: user.name })
   } catch (error) {
-    console.log(error)
     res.json({ status: 'error', error: 'invalid token' })
   }
 })
 
+// post request to update bio
 app.post('/api/bio', async (req, res) => {
   const token = req.headers['x-access-token']
 
@@ -141,7 +141,6 @@ app.post('/api/bio', async (req, res) => {
 
     return res.json({ status: 'ok' })
   } catch (error) {
-    console.log(error)
     res.json({ status: 'error', error: 'invalid token' })
   }
 })
@@ -157,17 +156,16 @@ app.patch('/api/profile-photo', async (req, res) => {
 
     return res.json({ status: 'ok' })
   } catch (error) {
-    console.log(error)
+ 
     res.json({ status: 'error', error: 'invalid token' })
   }
 })
 
+// patch request for updating password
 app.patch('/api/reset-password', async (req, res) => {
   const token = req.headers['x-access-token']
-  console.log(token)
   try {
     const newPassword = await bcrypt.hash(req.body.password, 15)
-    console.log(newPassword)
 
     const decoded = jwt.verify(token, 'secret123')
     const email = decoded.email
@@ -178,9 +176,9 @@ app.patch('/api/reset-password', async (req, res) => {
   }
 })
 
+// delete request for deleting profile
 app.delete('/api/delete-profile', async (req, res) => {
   const token = req.headers['x-access-token']
-  console.log(token)
   try {
     const decoded = jwt.verify(token, 'secret123')
     const email = decoded.email
@@ -199,10 +197,8 @@ app.patch('/api/addfavourite', async (req, res) => {
     const decoded = jwt.verify(token, 'secret123')
     const email = decoded.email
     await User.updateOne({ email: email }, { $push: { favourites: req.body.favourites } })
-    console.log(req.body.favourites)
     return res.json({ status: 'ok' })
   } catch (error) {
-    console.log(error)
     res.json({ status: 'error', error: 'invalid token' })
   }
 })
@@ -215,10 +211,9 @@ app.patch('/api/removefavourite', async (req, res) => {
     const decoded = jwt.verify(token, 'secret123')
     const email = decoded.email
     await User.updateOne({ email: email }, { $pull: { favourites: req.body.favourites } })
-    console.log(req.body.favourites)
     return res.json({ status: 'ok' })
   } catch (error) {
-    console.log(error)
+   
     res.json({ status: 'error', error: 'invalid token' })
   }
 })

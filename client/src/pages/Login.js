@@ -4,6 +4,8 @@ function App() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+
+  // login function
   async function loginUser(event) {
     event.preventDefault()
 
@@ -12,7 +14,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      body: JSON.stringify({   
         email,
         password,
       }),
@@ -21,12 +23,13 @@ function App() {
     const data = await response.json()
 
     if (data.user) {
-      localStorage.setItem('token', data.user)
-      console.log('Login success')
+
+      localStorage.setItem('token', data.user) // give the user a token
+      console.log("Login success")
 
       alert('Login successful')
 
-      window.location.href = '/dashboard'
+      window.location.href = '/dashboard'  // go to profile page
     } else {
       console.log('Username/Password Error')
       alert('Please check your username & password')
@@ -40,7 +43,7 @@ function App() {
         <input
           class="btn btn-primary"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}  // set state as the input
           type="email"
           placeholder="Email"
         />
@@ -48,7 +51,8 @@ function App() {
         <input
           class="btn btn-primary"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}  // set state as the input
+          type="email"
           type="password"
           placeholder="Password"
         />

@@ -47,9 +47,8 @@ function App() {
     const data = await req.json()
     if (data.status === 'ok') {
       setFavourites(data.favourites)
-    } else {
-      alert(data.error)
-    }
+    } 
+  
   }
 
   // Function allowing for adding of favourites
@@ -65,7 +64,6 @@ function App() {
       }),
     })
     const data = await res.json()
-    console.log(data)
   }
 
   // Function allowing for removal of favourites
@@ -81,7 +79,7 @@ function App() {
       }),
     })
     const data = await res.json()
-    console.log(data)
+   
   }
 
   // Use effect function for the fetching of favourites

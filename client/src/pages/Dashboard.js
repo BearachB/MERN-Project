@@ -5,11 +5,12 @@ import { useNavigate, Link } from 'react-router-dom'
 const Dashboard = () => {
   const navigate = useNavigate()
   const [bio, setBio] = useState('')
-  const [tempBio, setTempBio] = useState('')
+ 
   const [photo, setPhoto] = useState('')
   const [name, setName] = useState('')
 
-  async function populateBio() {
+  // fetch bio to display
+  async function populateBio() {    
     const req = await fetch('http://localhost:1337/api/bio', {
       headers: {
         'x-access-token': localStorage.getItem('token'),
@@ -24,6 +25,9 @@ const Dashboard = () => {
     }
   }
 
+
+
+// fetch profile photo to display
   async function loadImage() {
     const req = await fetch('http://localhost:1337/api/bio', {
       headers: {
@@ -40,7 +44,7 @@ const Dashboard = () => {
     }
   }
 loadImage()
-// console.log(photo)
+
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -55,6 +59,7 @@ loadImage()
     }
   })
 
+  // fetch name to display
   async function getName() {
     const req = await fetch('http://localhost:1337/api/bio', {
       headers: {
@@ -71,29 +76,8 @@ loadImage()
   }
   getName()
 
-  async function updateBio(event) {
-    event.preventDefault()
 
-    const req = await fetch('http://localhost:1337/api/bio', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token'),
-      },
-      body: JSON.stringify({
-        bio: tempBio,
-      }),
-    })
-
-    const data = await req.json()
-    if (data.status === 'ok') {
-      setBio(tempBio)
-      setTempBio('')
-    } else {
-      alert(data.error)
-    }
-  }
-
+// delete the profile
   async function  handleDelete(event) {
 
     event.preventDefault()
@@ -104,12 +88,9 @@ loadImage()
         'x-access-token': localStorage.getItem('token')
       }
     })
-
     const data = await response.json()
-    console.log(data.status)
-
     if (data.status === 'ok') {
-      localStorage.clear()
+      localStorage.clear()  // clear token
       navigate('../login/', { replace: true })
     }
   }

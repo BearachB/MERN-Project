@@ -6,6 +6,8 @@ function App() {
 
   const [password, setPassword] = useState('')
 
+
+  //post request to change password
   async function resetPassword(event) {
     event.preventDefault()
     const response = await fetch('http://localhost:1337/api/reset-password', {
@@ -20,7 +22,7 @@ function App() {
     })
 
     const data = await response.json()
-
+    
     if (data.status === 'ok') {
       alert('Password Reset!')
       navigate('/editprofile')

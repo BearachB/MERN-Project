@@ -2,33 +2,23 @@ import React, { useState, useEffect } from 'react'
 
 function FavPage() {
   const [songs, setSongs] = useState([])
-  // let [page, setPage] = useState(1)
   const [favourites, setFavourites] = useState([])
   const [isLoaded, setisLoaded] = useState(false)
-  // const [showFavourites, setShowFavourites] = useState([])
-
-  // const nextPage = () => {
-  //   setPage(page + 1)
-  // }
-
-  // const previousPage = () => {
-  //   setPage(page - 1)
-  // }
+ 
 
 
-
-  const fetchSongs = async () => {
+  const fetchSongs = async () => {   // get songs from DB
     const result = await fetch(
       'http://localhost:1337/api/songs?page=1&limit=100',
     )
     const data = await result.json()
 
     setSongs(data.results)
-    setisLoaded(true)
+    setisLoaded(true) // so it loads together
   }
 
 
-  const fetchFavourites = async () => {
+  const fetchFavourites = async () => { // get favourites from db
     const req = await fetch('http://localhost:1337/api/bio', {
       headers: {
         'x-access-token': localStorage.getItem('token'),
@@ -39,7 +29,6 @@ function FavPage() {
     if (data.status === 'ok') {
       
     setFavourites(data.favourites)
-  
       
       
     } else {
@@ -49,8 +38,8 @@ function FavPage() {
 
 
 
-
-  const removeFavourites = async (Fav) => {
+// patch request to change favourites when one is removed
+  const removeFavourites = async (Fav) => {    
     const res = await fetch('http://localhost:1337/api/removefavourite', {
     method: "PATCH",
     headers: {
@@ -67,22 +56,18 @@ function FavPage() {
   
   }
 
-// const removeFavourites = async () => {/
-
-
-
-
+// page loads every time favourites is changed
 useEffect(() =>{
  
   fetchFavourites()
   
 },[favourites])
  
-// useEffect(() => {
- 
+
+ // get songs
 fetchSongs()
 
-// },[page])
+
 
 
   
@@ -90,8 +75,8 @@ fetchSongs()
     // Main container for the results
     <div className="container">
       <u><h1>Favourites</h1></u>
-      { isLoaded ? (
-        favourites.length !==0 ? (
+      { isLoaded ? (                // show all when loaded
+        favourites.length !==0 ? (   // only show if tere are favourites in list
         <>
       <table>
         {/* Table head */}
@@ -106,10 +91,10 @@ fetchSongs()
         </thead>
         {/* Table head */}
         <tbody>
-          {songs.map((info) => {
+          {songs.map((info) => {  // map to make table
             return (
             <tr>
-              {(favourites.includes(info.track_name))? (
+              {(favourites.includes(info.track_name))? (  // if songs are in favourites
               <>
               <td>{info.artist_name}</td>
               <td>{info.track_name}</td>
@@ -123,7 +108,7 @@ fetchSongs()
           })}
         </tbody>
      </table>
-  </> 
+  </>         // show if favuorites is empty
         ): <h2>You Have No Songs in Your Favourites. <br /> Try adding some by searching for songs.</h2>
         ) : null }
     </div>
