@@ -15,10 +15,6 @@ import Toggle from '../Toggle'
 
 const Header = () => {
 
-  function handleLogOut() {
-    localStorage.setItem('token', '')
-    localStorage.clear()
-  }
   return (
     <div>
       {/* Navbar structure taken from https://react-bootstrap.github.io/components/navbar/*/}
@@ -32,16 +28,11 @@ const Header = () => {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href="/search">Search</Nav.Link>
-              <Nav.Link href="/songs">Song List</Nav.Link>
-              <Nav.Link href="/login">Log In</Nav.Link>
+              <Nav.Link href="/search-nl">Search</Nav.Link>
+              <Nav.Link href="/songs-nl">Song List</Nav.Link>
               <NavDropdown title="Account" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="/dashboard">My Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/fav-list">My Favourites</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={handleLogOut} href="/login">
-                  Sign Out
-                </NavDropdown.Item>
+                <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                <NavDropdown.Item href="/register">Register</NavDropdown.Item>
               </NavDropdown>
               <br/>
               {/* <Nav.Link href="#"> */}

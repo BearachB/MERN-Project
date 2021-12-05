@@ -132,13 +132,14 @@ app.post('/api/register', async (req, res) => {
 })
 
 app.post('/api/login', async (req, res) => {
+  try{
   const user = await User.findOne({
     email: req.body.email,
   })
 
-  if (!user) {
-    return { status: 'error', error: 'Invalid login' }
-  }
+  // if (!user) {
+  //   return { status: 'error', error: 'Invalid login' }
+  // }
 
   const isPasswordValid = await bcrypt.compare(req.body.password, user.password)
 
@@ -152,8 +153,8 @@ app.post('/api/login', async (req, res) => {
     )
 
     return res.json({ status: 'ok', user: token })
-  } else {
-    return res.json({ status: 'error', user: false })
+  }} catch (err) {
+     res.json({ status: 'error', error: 'Invalid login', user: false })
   }
 })
 

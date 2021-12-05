@@ -17,7 +17,7 @@ function App() {
       filters: Filters,
       searchTerm: newSearchTerm,
     }
-    Q
+    
     setSkip(0)
     setSearchTerms(newSearchTerm)
     fetchSongs(newSearchTerm)
