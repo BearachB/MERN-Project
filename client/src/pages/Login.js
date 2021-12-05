@@ -22,15 +22,14 @@ function App() {
 
     if (data.user) {
       localStorage.setItem('token', data.user)
-      console.log("Login success")
-      
+      console.log('Login success')
+
       alert('Login successful')
 
       window.location.href = '/dashboard'
     } else {
-      console.log("Username/Password Error")
+      console.log('Username/Password Error')
       alert('Please check your username & password')
-
     }
   }
 
@@ -39,6 +38,7 @@ function App() {
       <h1>Login</h1>
       <form onSubmit={loginUser}>
         <input
+          class="btn btn-primary"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
@@ -46,13 +46,16 @@ function App() {
         />
         <br />
         <input
+          class="btn btn-primary"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="password"
           placeholder="Password"
         />
         <br />
-        <input type="submit" value="Login" />
+        <br />
+        <br />
+        <input class="btn btn-primary" type="submit" value="Login" />
       </form>
     </div>
   )
