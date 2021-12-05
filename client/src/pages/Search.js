@@ -3,8 +3,8 @@ import SearchFeature from '../components/SearchFeature'
 
 function App() {
   const [songs, setSongs] = useState([])
-  const [Filters, setFilters] = useState('')
-  const [Limit, setLimit] = useState(100)
+  const Filters = ''
+  const Limit = 100
   const [SearchTerm, setSearchTerms] = useState('')
   const [Skip, setSkip] = useState(0)
   const [favourites, setFavourites] = useState([])
@@ -12,7 +12,7 @@ function App() {
 
   const updateSearchTerms = (newSearchTerm) => {
     const variables = {
-      skip: 0,
+      skip: Skip,
       limit: Limit,
       filters: Filters,
       searchTerm: newSearchTerm,
@@ -21,8 +21,6 @@ function App() {
     setSkip(0)
     setSearchTerms(newSearchTerm)
     fetchSongs(newSearchTerm)
-    console.log('Fetching songs')
-    console.log('Search.js Search term here:', newSearchTerm)
   }
 
   // Function that fetches the songs to be displayed
@@ -30,7 +28,7 @@ function App() {
     const result = await fetch(
       `http://localhost:1337/api/songsearch?page=1&limit=100&searchTerm=${SearchTerm}`,
     )
-    console.log('Search.js Search term here:', SearchTerm)
+
     const data = await result.json()
     setSongs(data.results)
     setisLoaded(true)
@@ -63,7 +61,7 @@ function App() {
         favourites: newFav,
       }),
     })
-    const data = await res.json()
+   const data =  await res.json()
   }
 
   // Function allowing for removal of favourites
@@ -78,7 +76,7 @@ function App() {
         favourites: Fav,
       }),
     })
-    const data = await res.json()
+    const data =  await res.json()
    
   }
 
@@ -119,8 +117,8 @@ function App() {
               </thead>
               {/* Table body - Prints the actual song info */}
               <tbody>
-                {songs.map((info) => (
-                  <tr>
+              {songs.map((info,i) => (
+                <tr key={i}>
                     <td>{info.artist_name}</td>
                     <td>{info.track_name}</td>
                     <td style={{ textAlign: 'center' }}>{info.popularity}</td>

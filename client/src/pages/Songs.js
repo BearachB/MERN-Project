@@ -88,7 +88,7 @@ function App() {
         favourites: newFav,
       }),
     })
-    const data = await res.json()
+     await res.json()
    
   }
 
@@ -104,7 +104,7 @@ function App() {
         favourites: Fav,
       }),
     })
-    const data = await res.json()
+   await res.json()
    
   }
 
@@ -139,8 +139,8 @@ function App() {
             </thead>
             {/* Table body - Prints the actual song info */}
             <tbody>
-              {songs.map((info) => (
-                <tr>
+              {songs.map((info,i) => (
+                <tr key={i}>
                   <td>{info.artist_name}</td>
                   <td>{info.track_name}</td>
                   <td style={{ textAlign: 'center' }}>{info.popularity}</td>

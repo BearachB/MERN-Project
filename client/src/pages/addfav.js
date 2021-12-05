@@ -51,7 +51,7 @@ function FavPage() {
           }),
     })
     const data = await res.json()
-    console.log(data)
+    
 
   
   }
@@ -64,10 +64,12 @@ useEffect(() =>{
 },[favourites])
  
 
- // get songs
-fetchSongs()
 
 
+useEffect(() =>{
+ fetchSongs()
+  
+},[favourites])
 
 
   
@@ -91,9 +93,9 @@ fetchSongs()
         </thead>
         {/* Table head */}
         <tbody>
-          {songs.map((info) => {  // map to make table
+          {songs.map((info,i) => {  // map to make table
             return (
-            <tr>
+            <tr key={i}>
               {(favourites.includes(info.track_name))? (  // if songs are in favourites
               <>
               <td>{info.artist_name}</td>

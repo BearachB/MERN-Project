@@ -91,12 +91,12 @@ loadImage()
     const data = await response.json()
     if (data.status === 'ok') {
       localStorage.clear()  // clear token
-      navigate('../login/', { replace: true })
+      navigate('../register/', { replace: true })
     }
   }
 
   return (
-    <div class="profile-content">
+    <div className="profile-content">
       <h1>Hello  {name || 'No bio found'}</h1>
       <img src={photo} alt={photo} width="200" style={{'borderRadius':'300px'}}/>
       <br/>
@@ -105,7 +105,7 @@ loadImage()
       <br/>
       <Link to="/editprofile"><button class="btn btn-primary">Update Profile</button></Link>
       <br/>
-      <button class="btn btn-primary" type="button" onClick={handleDelete}>Delete Account</button>
+      <button className="btn btn-primary" type="button" onClick={handleDelete}>Delete Account</button>
     </div>
   )
   }
