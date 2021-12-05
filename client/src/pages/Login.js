@@ -23,16 +23,16 @@ function App() {
     const data = await response.json()
 
     if (data.user) {
+
       localStorage.setItem('token', data.user) // give the user a token
       console.log("Login success")
-      
+
       alert('Login successful')
 
       window.location.href = '/dashboard'  // go to profile page
     } else {
-      console.log("Username/Password Error")
+      console.log('Username/Password Error')
       alert('Please check your username & password')
-
     }
   }
 
@@ -41,6 +41,7 @@ function App() {
       <h1>Login</h1>
       <form onSubmit={loginUser}>
         <input
+          class="btn btn-primary"
           value={email}
           onChange={(e) => setEmail(e.target.value)}  // set state as the input
           type="email"
@@ -48,6 +49,7 @@ function App() {
         />
         <br />
         <input
+          class="btn btn-primary"
           value={password}
           onChange={(e) => setPassword(e.target.value)}  // set state as the input
           type="email"
@@ -55,7 +57,9 @@ function App() {
           placeholder="Password"
         />
         <br />
-        <input type="submit" value="Login" />
+        <br />
+        <br />
+        <input class="btn btn-primary" type="submit" value="Login" />
       </form>
     </div>
   )

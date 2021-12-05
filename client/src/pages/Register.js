@@ -38,6 +38,7 @@ function App() {
       <h1>Register</h1>
       <form onSubmit={registerUser}>
         <input
+          class="btn btn-primary"
           value={name}
           onChange={(e) => setName(e.target.value)}  // input is set as nanme
           type="text"
@@ -45,6 +46,7 @@ function App() {
         />
         <br />
         <input
+          class="btn btn-primary"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
@@ -52,13 +54,16 @@ function App() {
         />
         <br />
         <input
+          class="btn btn-primary"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="password"
           placeholder="Password"
         />
         <br />
-        <input type="submit" value="Register" />
+        <br />
+        <br />
+        <input class="btn btn-primary" type="submit" value="Register" />
       </form>
     </div>
   )

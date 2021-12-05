@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-
 function App() {
   const navigate = useNavigate()
 
@@ -15,60 +14,41 @@ function App() {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('token')
+        'x-access-token': localStorage.getItem('token'),
       },
       body: JSON.stringify({
-        password
+        password,
       }),
     })
 
     const data = await response.json()
     
     if (data.status === 'ok') {
-      alert("Password Reset!")
+      alert('Password Reset!')
       navigate('/editprofile')
     }
   }
 
   return (
     <div class="profile-content">
-      <h1>Reset</h1>
+      <h1>Password Reset</h1>
       <form onSubmit={resetPassword}>
         <input
+          class="btn btn-primary"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="password"
-          placeholder="Password"
+          placeholder="Enter new password here"
         />
         <br />
-        <input type="submit" value="Reset" />
+        <br />
+        <input class="btn btn-primary" type="submit" value="Reset" />
       </form>
     </div>
   )
 }
 
 export default App
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // function App() {
 //   // const navigate = useNavigate()
@@ -95,7 +75,6 @@ export default App
 //       navigate('/login')
 //     }
 //   }
-
 
 //   return
 //     (
