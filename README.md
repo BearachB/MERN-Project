@@ -17,6 +17,7 @@ Node version v16.13.0 is installed
 6. In “client” CLI, “npm start” to start the client server.
 7. In “server” CLI, “npm run dev” to start the backend server.
 8. The web. app. will now open in your default browser.
+9. Go to the registration page to create an account to explore all the functionality of the app.
 
 
 ###If using a local MongoDB server (Harder method):
@@ -34,6 +35,7 @@ Node version v16.13.0 is installed
 12. In “client” CLI, “npm start” to start the client server.
 13. In “server” CLI, “npm run dev” to start the backend server.
 14. The web. app. will now open in your default browser.
+15. Go to the registration page to create an account to explore all the functionality of the app.
 
 
 FOR Connection to MongoDB Atlas Server using MongoDB Compass to inspect database:
