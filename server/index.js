@@ -10,9 +10,9 @@ const bcrypt = require('bcryptjs')
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect(   // mongoose connection
-  'mongodb+srv://bearach:mernproject@cluster0.d4sre.mongodb.net/mern_project?retryWrites=true&w=majority',
-)
+mongoose.connect('mongodb://localhost:27017/full-mern-stack')
+
+
 // get songs form db
 app.get('/api/songs', paginatedResults(), (req, res) => {
   res.json(res.paginatedResults)
